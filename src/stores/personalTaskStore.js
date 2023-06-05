@@ -4,12 +4,6 @@ import { defineStore } from "pinia";
 export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   let columns = ref([]);
 
-  const count = ref(0);
-  const doubleCount = computed(() => count.value * 2);
-  function increment() {
-    count.value++;
-  }
-
   // Boards
 
   const addBoard = (title) => {
@@ -35,18 +29,18 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     const board = columns.value.find((_, idx) => i === idx);
 
     if (board) {
-      columns.value.tasks.push(task);
+      columns.value[i].tasks.push(task);
     }
   };
 
-  const removeTask = (boardId, taskId) => {
-    const board = columns.value.find((board) => board.id === boardId);
+  const removeTask = (taskId, boardId) => {
+    const board = columns.value.find((_, idx) => idx === boardId);
 
     if (board) {
-      const index = columns.value.tasks.findIndex((task) => task.id === taskId);
+      const index = columns.value[boardId].tasks.findIndex((_, idx) => idx === taskId);
 
       if (index !== -1) {
-        columns.value.tasks.splice(index, 1);
+        columns.value[boardId].tasks.splice(index, 1);
       }
     }
   };
@@ -67,10 +61,6 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
 
   return {
     columns,
-    count,
-    doubleCount,
-
-    increment,
     addBoard,
     removeBoard,
     addTask,

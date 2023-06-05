@@ -6,8 +6,5 @@ const personalTaskStore = usePersonalTaskStore();
 </script>
 
 <template>
-  <main>
-    {{ personalTaskStore.columns }}
-    <button @click="personalTaskStore.addBoard('todo')" />
-  </main>
+  <main>home</main>
 </template>
