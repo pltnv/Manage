@@ -1,16 +1,18 @@
-import { computed } from "vue";
 import { defineStore } from "pinia";
+import { useI18n } from "vue-i18n";
+import { useLocalStorage } from "../composable/useLocalStorage";
 
 export const useI18nStore = defineStore("i18nStore", () => {
-  let locale = computed(() => i18n.global.locale);
+  let { locale } = useI18n();
 
-  const setLocale = (locale) => {
-    if (locale !== "ru" && locale !== "en") return;
-    i18n.global.locale = locale;
+  const toggleLocale = () => {
+    locale.value === "en" ? (locale.value = "ru") : (locale.value = "en");
   };
+
+  useLocalStorage(locale, "locale");
 
   return {
     locale,
-    setLocale
+    toggleLocale
   };
 });

@@ -47,7 +47,6 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
 
   // get data from LS
   if (localStorage.getItem("columns")) {
-    console.log(localStorage.getItem("columns"));
     columns.value = JSON.parse(localStorage.getItem("columns"));
   }
 

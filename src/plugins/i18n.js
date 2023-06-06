@@ -1,8 +1,9 @@
-import { createI18n } from "vue-i18n";
+import { createI18n, useI18n } from "vue-i18n";
 import en from "../views/Desk/i18n/en.json";
 import ru from "../views/Desk/i18n/ru.json";
 
 const i18n = createI18n({
+  legacy: false,
   locale: "en",
   fallbackLocale: "en",
   messages: {
@@ -11,6 +12,5 @@ const i18n = createI18n({
   }
 });
 
-// console.log(i18n.global.locale);
 
 export default i18n;
