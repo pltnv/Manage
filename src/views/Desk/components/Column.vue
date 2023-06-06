@@ -13,7 +13,7 @@ defineProps({
   }
 });
 
-const emit = defineEmits(["click:dots", 'click:saveTask"']);
+const emit = defineEmits(["click:dots", "click:saveTask", "click:editTask"]);
 
 let showAddContent = ref(false);
 const addTask = () => {
@@ -24,8 +24,8 @@ const closeAddContent = () => {
   showAddContent.value = false;
 };
 
-const addTaskEmitHandler = () => {
-  console.log("emit: addTask");
+const editTaskEmitHandler = () => {
+  emit("click:editTask");
 };
 
 const openDotsEmit = () => {
@@ -46,7 +46,7 @@ const saveTaskEmit = () => {
     </div>
     <div class="desk-column__tasks">
       <div v-for="(task, index) in tasks" :key="index">
-        <Task :task="task.text" @addTask="addTaskEmitHandler" />
+        <Task :task="task.text" @click:editTask="editTaskEmitHandler" />
       </div>
       <textarea v-if="showAddContent" />
     </div>

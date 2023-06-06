@@ -6,10 +6,10 @@ defineProps({
   }
 });
 
-const emit = defineEmits(["addTask"]);
+const emit = defineEmits(["click:editTask"]);
 
 const editTask = () => {
-  emit("addTask");
+  emit("click:editTask");
 };
 </script>
 
