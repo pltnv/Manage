@@ -1,17 +1,27 @@
 <script setup>
 import { ref } from "vue";
 import Column from "../Desk/components/Column.vue";
-import { useI18nStore } from "../../stores/i18nStore";
-const i18n = useI18nStore();
 
 // mock data
 const tasks = ref([{ text: "Написать письмо" }, { text: "Отправить проект" }]);
+
+const clickDotsEmitHandler = () => {
+  console.log("emit: click dots");
+};
+
+const saveTaskEmitHandler = () => {
+  console.log("emit: click save new task");
+};
 </script>
 
 <template>
   <main>
     Desk page
-    <Column :title="'Работа над проектом'" :tasks="tasks" />
-    <button @click="i18n.toggleLocale">Toggle locale</button>
+    <Column
+      :title="'Работа над проектом'"
+      :tasks="tasks"
+      @click:dots="clickDotsEmitHandler"
+      @click:saveTask="saveTaskEmitHandler"
+    />
   </main>
 </template>
