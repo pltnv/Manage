@@ -1,4 +1,4 @@
-# manage
+# &#x23F1; Manage app
 
 This template should help get you started developing with Vue 3 in Vite.
 
