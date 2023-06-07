@@ -9,9 +9,13 @@ import "@mdi/font/css/materialdesignicons.css";
 import App from "./App.vue";
 import router from "./router";
 
+// Global components
+import IButton from "../src/components/IButton.vue";
+
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
 app.use(i18n);
+app.component("i-button", IButton);
 app.mount("#app");

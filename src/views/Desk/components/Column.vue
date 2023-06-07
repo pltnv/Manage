@@ -10,6 +10,10 @@ defineProps({
   tasks: {
     required: false,
     type: Array
+  },
+  bgc: {
+    required: false,
+    type: String
   }
 });
 
@@ -28,7 +32,7 @@ const editTaskEmitHandler = () => {
   emit("click:editTask");
 };
 
-const openDotsEmit = () => {
+const clickDotsEmit = () => {
   emit("click:dots");
 };
 
@@ -39,25 +43,39 @@ const saveTaskEmit = () => {
 </script>
 
 <template>
-  <div class="desk-column">
+  <div class="desk-column" :style="{ background: bgc }">
     <div class="desk-column__title">
       <div v-text="title" />
-      <button class="mdi mdi-dots-grid" @click="openDotsEmit" />
+      <i-button variant="icon" icon-left="mdi-dots-grid" @click="clickDotsEmit" />
     </div>
+
     <div class="desk-column__tasks">
       <div v-for="(task, index) in tasks" :key="index">
         <Task :task="task.text" @click:editTask="editTaskEmitHandler" />
       </div>
       <textarea v-if="showAddContent" />
     </div>
-    <button v-if="!showAddContent" v-text="$t('column.addTask')" @click="addTask" />
+
+    <i-button
+      v-if="!showAddContent"
+      icon-left="mdi-plus"
+      variant="text"
+      block
+      size="md"
+      round="8px"
+      :label="$t('column.addTask')"
+      @click="addTask"
+    />
+
     <div v-else class="desk-column__save">
-      <button
+      <i-button
+        round="8px"
+        size="md"
+        :label="$t('column.addTask')"
         class="desk-column__save__btn"
-        v-text="$t('column.addTask')"
         @click="saveTaskEmit"
       />
-      <button class="mdi mdi-close" @click="closeAddContent" />
+      <i-button variant="icon" size="sm" icon-left="mdi-close" @click="closeAddContent" />
     </div>
   </div>
 </template>
@@ -91,6 +109,7 @@ const saveTaskEmit = () => {
 
   &__save {
     display: flex;
+    align-items: center;
     justify-content: flex-start;
     gap: 4px;
 

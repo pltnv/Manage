@@ -31,6 +31,7 @@ const editTask = () => {
   min-height: 20px;
   max-height: 40px;
   padding: 10px;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
   &:hover {
