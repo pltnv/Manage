@@ -35,6 +35,7 @@ const editTask = () => {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
   &:hover {
+    cursor: pointer;
     opacity: 0.7;
 
     .task__edit {

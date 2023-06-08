@@ -1,3 +1,5 @@
 <template>
-  <main>Login layout</main>
+  <div class="login-layout">
+    <router-view />
+  </div>
 </template>
