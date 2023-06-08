@@ -20,7 +20,6 @@ const saveTaskEmitHandler = () => {
     <Column
       :title="'Работа над проектом'"
       :tasks="tasks"
-      bgc="red"
       @click:dots="clickDotsEmitHandler"
       @click:saveTask="saveTaskEmitHandler"
     />

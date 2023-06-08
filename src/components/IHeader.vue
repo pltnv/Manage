@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   id: String
@@ -9,31 +9,22 @@ const emit = defineEmits(["click:exit"]);
 
 let isUserVisible = ref(false);
 
-const classes = computed(() => {
-  return {
-    // "i-button--block": props.block,
-    // "i-button--rounded": props.rounded,
-    // [`i-button--${props.size}`]: true,
-    // [`i-button--${props.variant}`]: true
-  };
-});
-
 const clickExit = () => {
   emit("click:exit");
 };
 
-const toggleUser = () => {
+const toggleUserInfo = () => {
   isUserVisible.value = !isUserVisible.value;
 };
 </script>
 
 <template>
-  <div class="i-header" :>
+  <div class="i-header" :id="props.id">
     <div class="i-header__actions">
       <slot />
     </div>
     <div class="i-header__user">
-      <i-button @click="toggleUser" />
+      <i-button @click="toggleUserInfo" />
       <div v-if="isUserVisible" class="i-header__user__info">
         <router-link />
         <i-button label="Выйти" @click="clickExit" />

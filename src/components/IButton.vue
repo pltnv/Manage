@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   id: String,
@@ -191,10 +191,6 @@ const handleClick = () => {
       background: none;
     }
   }
-
-  // &__icon {
-
-  // }
 
   &:disabled {
     pointer-events: none;
