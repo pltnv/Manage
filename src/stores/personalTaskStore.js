@@ -16,7 +16,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   const removeBoard = (id) => {
-    const index = columns.value.findIndex((board, i) => i === id);
+    const index = columns.value.findIndex((_, i) => i === id);
 
     if (index !== -1) {
       columns.value.splice(index, 1);
@@ -46,6 +46,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   // get data from LS
+  // todo: add useLocalStorage using instead of following code:
   if (localStorage.getItem("columns")) {
     columns.value = JSON.parse(localStorage.getItem("columns"));
   }
