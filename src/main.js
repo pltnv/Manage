@@ -8,6 +8,8 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
+import clickOutside from "../src/plugins/directives/click-outside";
+
 // Global components
 import IButton from "../src/components/IButton.vue";
 
@@ -17,4 +19,5 @@ app.use(createPinia());
 app.use(router);
 app.use(i18n);
 app.component("i-button", IButton);
+app.use(clickOutside);
 app.mount("#app");

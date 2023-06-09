@@ -72,9 +72,9 @@ const handleClick = () => {
         class="mdi i-button__icon--left"
         :class="iconLeft"
         :style="{ color: iconLeftColor }"
-      ></i>
+      />
 
-      <span v-if="label" class="i-button__label"> {{ label }}</span>
+      <span v-if="label" class="i-button__label" v-text="label" />
 
       <i
         v-if="iconRight"
@@ -91,7 +91,7 @@ const handleClick = () => {
   display: block;
   padding: 10px;
   width: 140px; // to fix
-  background-color: transparent;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
   border: none;
   cursor: pointer;

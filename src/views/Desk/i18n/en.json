@@ -1,5 +1,8 @@
 {
   "column": {
     "addTask": "Add a task"
+  },
+  "header": {
+    "exit": "Exit"
   }
 }
