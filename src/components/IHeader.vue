@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   id: String
@@ -26,7 +26,6 @@ const toggleUserInfo = () => {
     <div class="i-header__user">
       <i-button @click="toggleUserInfo" />
       <div v-if="isUserVisible" class="i-header__user__info">
-        <router-link />
         <i-button label="Выйти" @click="clickExit" />
       </div>
     </div>

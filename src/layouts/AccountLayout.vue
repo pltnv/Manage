@@ -15,12 +15,12 @@ const logout = async () => {
 
 <template>
   <div class="account-layout">
-    <n-header @click:exit="logout">
+    <i-header @click:exit="logout">
       <template>
         <i-button variant="icon" size="md" icon-left="mdi-web" @click="toggleLocale" />
         <i-button variant="icon" size="md" icon-left="mdi-brightness-6" />
       </template>
-    </n-header>
+    </i-header>
 
     <router-view />
   </div>
