@@ -1,3 +1,12 @@
+<p align="center">
+  <a href="https://github.com/vuejs/vue">
+    <img src="https://img.shields.io/badge/vue-3.3.2-brightgreen.svg" alt="vue">
+  </a>
+  <a href="https://github.com/vuejs/pinia">
+    <img src="https://img.shields.io/badge/pinia-2.0.36-brightgreen.svg" alt="element-ui">
+  </a>
+ </p>
+
 # &#x23F1; Manage app
 
 This template should help get you started developing with Vue 3 in Vite.
