@@ -1,4 +1,4 @@
-import { ref, computed, watch } from "vue";
+import { ref, watch } from "vue";
 import { defineStore } from "pinia";
 
 export const usePersonalTaskStore = defineStore("personalTaskStore", () => {

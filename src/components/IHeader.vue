@@ -47,7 +47,6 @@ const closeUserInfo = () => {
 
 <style lang="scss">
 .i-header {
-  position: relative;
   z-index: 10;
   display: flex;
   align-items: center;
@@ -74,6 +73,19 @@ const closeUserInfo = () => {
       padding: 10px;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
       background-color: white;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 8px 8px 8px;
+        border-color: transparent transparent rgba(195, 189, 189, 0.978) transparent;
+      }
     }
   }
 }

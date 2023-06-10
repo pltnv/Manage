@@ -1,7 +1,7 @@
 export default [
   {
     path: "/desks",
-    component: () => import("../../../layouts/AccountLayout.vue"),
+    component: () => import("@/layouts/AccountLayout.vue"),
     children: [
       {
         path: "",
