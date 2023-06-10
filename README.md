@@ -3,10 +3,13 @@
     <img src="https://img.shields.io/badge/vue-3.3.2-brightgreen.svg" alt="vue">
   </a>
   <a href="https://github.com/vuejs/pinia">
-    <img src="https://img.shields.io/badge/pinia-2.0.36-brightgreen.svg" alt="element-ui">
+    <img src="https://img.shields.io/badge/pinia-2.0.36-brightgreen.svg" alt="pinia">
   </a>
-    <a href="  https://github.com/vitejs/vite">
-    <img src="https://img.shields.io/badge/vite-4.3.5-brightgreen.svg" alt="element-ui">
+  <a href="  https://github.com/vitejs/vite">
+    <img src="https://img.shields.io/badge/vite-4.3.5-brightgreen.svg" alt="vite">
+  </a>
+  <a href="https://github.com/vuelidate/vuelidate#readme">
+    <img src="https://img.shields.io/badge/vuelidate-2.0.2-brightgreen.svg" alt="vuelidate">
   </a>
  </p>
 

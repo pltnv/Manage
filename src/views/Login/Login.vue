@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -9,9 +11,22 @@ const authStore = useAuthStore();
 let name = ref("");
 let password = ref("");
 
+const rules = {
+  name: { required },
+  password: { required }
+};
+
+const v$ = useVuelidate(rules, { name, password });
+
 const login = async () => {
+  const res = await v$.value.$validate();
+
+  if (!res) {
+    console.log("You messed up");
+    return;
+  }
   await authStore.login(name.value, password.value);
-  router.push({ name: "Main" });
+  await router.push({ name: "Main" });
 };
 </script>
 
