@@ -1,19 +1,24 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("authStore", () => {
-  let user = ref({});
-  let isAuthorized = computed(() => true); // to fix
+  const router = useRouter();
 
-  const login = async ({ login, password }) => {
-    // request
+  let user = ref({});
+  let isAuthorized = ref(false);
+
+  const login = async (login, password) => {
+    login !== "" && password !== ""
+      ? ((isAuthorized.value = true), (user.value = { login: login, password: password }))
+      : (isAuthorized.value = false);
   };
 
   const logout = async () => {
     try {
-      // await smth
+      isAuthorized.value = false;
+      user.value = {};
     } finally {
-      user.value = null;
       await router.push({ name: "Login" });
     }
   };

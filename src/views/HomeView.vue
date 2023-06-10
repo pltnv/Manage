@@ -6,5 +6,5 @@ const personalTaskStore = usePersonalTaskStore();
 </script>
 
 <template>
-  <div>home????</div>
+  <div>Home</div>
 </template>

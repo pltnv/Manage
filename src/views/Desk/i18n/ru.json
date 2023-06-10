@@ -4,5 +4,9 @@
   },
   "header": {
     "exit": "Выйти"
+  },
+  "login": {
+    "appeal": "Войти в Manage app",
+    "login": "Войти"
   }
 }
