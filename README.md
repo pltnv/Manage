@@ -5,6 +5,9 @@
   <a href="https://github.com/vuejs/pinia">
     <img src="https://img.shields.io/badge/pinia-2.0.36-brightgreen.svg" alt="element-ui">
   </a>
+    <a href="  https://github.com/vitejs/vite">
+    <img src="https://img.shields.io/badge/vite-4.3.5-brightgreen.svg" alt="element-ui">
+  </a>
  </p>
 
 # &#x23F1; Manage app
