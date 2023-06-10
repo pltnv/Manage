@@ -15,7 +15,7 @@ const saveTaskEmitHandler = () => {
 </script>
 
 <template>
-  <main>
+  <div>
     Desk page
     <Column
       :title="'Работа над проектом'"
@@ -23,5 +23,5 @@ const saveTaskEmitHandler = () => {
       @click:dots="clickDotsEmitHandler"
       @click:saveTask="saveTaskEmitHandler"
     />
-  </main>
+  </div>
 </template>

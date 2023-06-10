@@ -24,7 +24,7 @@ const closeUserInfo = () => {
 </script>
 
 <template>
-  <div class="i-header" :id="props.id">
+  <header class="i-header" :id="props.id">
     <div class="i-header__actions">
       <slot />
     </div>
@@ -42,7 +42,7 @@ const closeUserInfo = () => {
         <i-button size="md" block rounded :label="$t('header.exit')" @click="clickExit" />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <style lang="scss">
