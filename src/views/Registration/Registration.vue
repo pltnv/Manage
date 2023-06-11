@@ -33,13 +33,25 @@ const register = async () => {
 
 <template>
   <div class="registration">
-    <div v-text="$t('register.appeal')" />
+    <h1 v-text="$t('register.title')" />
 
-    <input v-model="mail" />
-    <input v-model="password" />
-    <input v-model="passwordConfirm" />
+    <i-input v-model="mail" :error="v$.mail.$invalid && v$.$dirty" @blur="v$.$touch()" />
+    <i-input
+      v-model="password"
+      type="password"
+      count
+      :error="v$.password.$invalid && v$.$dirty"
+      @blur="v$.$touch()"
+    />
+    <i-input
+      v-model="passwordConfirm"
+      type="password"
+      count
+      :error="v$.passwordConfirm.$invalid && v$.$dirty"
+      @blur="v$.$touch()"
+    />
 
-    <i-button @click="register" :label="$t('register.signup')" />
+    <i-button size="md" :label="$t('register.signup')" @click="register" />
   </div>
 </template>
 

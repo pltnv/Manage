@@ -6,11 +6,11 @@
     "exit": "Выйти"
   },
   "login": {
-    "appeal": "Войти в Manage app",
+    "title": "Войти в Manage app",
     "login": "Войти"
   },
   "register": {
-    "appeal": "Регистрация",
+    "title": "Регистрация",
     "signup": "Зарегистрироваться"
   }
 }

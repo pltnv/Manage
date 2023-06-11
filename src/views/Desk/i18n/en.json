@@ -6,11 +6,11 @@
     "exit": "Exit"
   },
   "login": {
-    "appeal": "Log in to the Manage app",
+    "title": "Log in to the Manage app",
     "login": "Sign in"
   },
   "register": {
-    "appeal": "Registration",
+    "title": "Registration",
     "signup": "Sign up"
   }
 }

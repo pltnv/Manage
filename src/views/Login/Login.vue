@@ -12,7 +12,7 @@ let name = ref("");
 let password = ref("");
 
 const rules = {
-  name: { required },
+  name: { required }, // fix label to email and update rule
   password: { required }
 };
 
@@ -32,10 +32,10 @@ const login = async () => {
 
 <template>
   <div class="login">
-    <div v-text="$t('login.appeal')" />
+    <h1 v-text="$t('login.title')" />
 
-    <input v-model="name" />
-    <input v-model="password" />
+    <i-input v-model="name" :error="v$.name.$invalid && v$.$dirty" />
+    <i-input v-model="password" :error="v$.password.$invalid && v$.$dirty" />
 
     <i-button @click="login" :label="$t('login.login')" />
     <router-link :to="{ name: 'Register' }">{{ $t("register.signup") }}</router-link>

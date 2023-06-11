@@ -1,6 +1,6 @@
 export default [
   {
-    path: "/register",
+    path: "/signup",
     component: () => import("@/layouts/LoginLayout.vue"),
     children: [
       {
