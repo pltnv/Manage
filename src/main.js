@@ -8,10 +8,10 @@ import App from "./App.vue";
 import router from "./router";
 
 // Custom directives
-import clickOutside from "../src/plugins/directives/click-outside";
+import clickOutside from "@/plugins/directives/click-outside";
 
 // Global components
-import IButton from "../src/components/IButton.vue";
+import IButton from "@/components/IButton.vue";
 
 const app = createApp(App);
 

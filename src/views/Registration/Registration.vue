@@ -3,47 +3,48 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+import { email, minLength, required, sameAs } from "@vuelidate/validators";
 
 const router = useRouter();
 const authStore = useAuthStore();
 
-let name = ref("");
+let mail = ref("");
 let password = ref("");
+let passwordConfirm = ref("");
 
 const rules = {
-  name: { required },
-  password: { required }
+  mail: { required, email },
+  password: { required, minLength: minLength(5) },
+  passwordConfirm: { required, sameAs: sameAs(password) }
 };
 
-const v$ = useVuelidate(rules, { name, password });
+const v$ = useVuelidate(rules, { mail, password, passwordConfirm });
 
-const login = async () => {
+const register = async () => {
   const res = await v$.value.$validate();
 
   if (!res) {
-    console.log("You messed up");
+    console.log("You messed up with sign up");
     return;
   }
-  await authStore.login(name.value, password.value);
-  await router.push({ name: "Main" });
+  console.log("Success");
 };
 </script>
 
 <template>
-  <div class="login">
-    <div v-text="$t('login.appeal')" />
+  <div class="registration">
+    <div v-text="$t('register.appeal')" />
 
-    <input v-model="name" />
+    <input v-model="mail" />
     <input v-model="password" />
+    <input v-model="passwordConfirm" />
 
-    <i-button @click="login" :label="$t('login.login')" />
-    <router-link :to="{ name: 'Register' }">{{ $t("register.signup") }}</router-link>
+    <i-button @click="register" :label="$t('register.signup')" />
   </div>
 </template>
 
 <style lang="scss">
-.login {
+.registration {
   display: flex;
   justify-content: center;
   align-items: center;

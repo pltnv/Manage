@@ -8,5 +8,9 @@
   "login": {
     "appeal": "Войти в Manage app",
     "login": "Войти"
+  },
+  "register": {
+    "appeal": "Регистрация",
+    "signup": "Зарегистрироваться"
   }
 }
