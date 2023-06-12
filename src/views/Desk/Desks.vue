@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Column from "./components/Column.vue";
+import Desk from "./components/Desk.vue";
 
 // mock data
 const tasks = ref([{ text: "Написать письмо" }, { text: "Отправить проект" }]);
@@ -16,12 +17,14 @@ const saveTaskEmitHandler = () => {
 
 <template>
   <div>
-    Desk page
+    Desk page iherieirgi
     <Column
       :title="'Работа над проектом'"
       :tasks="tasks"
       @click:dots="clickDotsEmitHandler"
       @click:saveTask="saveTaskEmitHandler"
     />
+
+    <Desk title="Задачи" color="red" />
   </div>
 </template>

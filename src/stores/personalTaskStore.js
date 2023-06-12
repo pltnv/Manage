@@ -1,5 +1,6 @@
 import { ref, watch } from "vue";
 import { defineStore } from "pinia";
+import { useLocalStorage } from "@/composable/useLocalStorage";
 
 export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   let columns = ref([]);
@@ -45,19 +46,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     }
   };
 
-  // get data from LS
-  // todo: add useLocalStorage using instead of following code:
-  if (localStorage.getItem("columns")) {
-    columns.value = JSON.parse(localStorage.getItem("columns"));
-  }
-
-  watch(
-    () => columns,
-    (state) => {
-      localStorage.setItem("columns", JSON.stringify(state.value));
-    },
-    { deep: true }
-  );
+  useLocalStorage(columns, "columns", true);
 
   return {
     columns,

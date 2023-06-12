@@ -9,9 +9,9 @@ export default [
         component: () => import("../Desks.vue")
       },
       {
-        path: ":id?",
+        path: "/:id?",
         name: "Desk",
-        component: () => import("../Desk.vue")
+        component: () => import("../DeskView.vue")
       }
     ]
   }
