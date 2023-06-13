@@ -3,7 +3,17 @@ import { defineStore } from "pinia";
 import { useLocalStorage } from "@/composable/useLocalStorage";
 
 export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
-  let columns = ref([]);
+  // mock data
+  let columns = ref([
+    { title: "Учеба", tasks: [] },
+    { title: "Уник", tasks: [] },
+    { title: "Учеба", tasks: [] },
+    { title: "Уник", tasks: [] },
+    { title: "Учеба", tasks: [] },
+    { title: "Уник", tasks: [] },
+    { title: "Учеба", tasks: [] },
+    { title: "Уник", tasks: [] }
+  ]);
 
   // Boards
 

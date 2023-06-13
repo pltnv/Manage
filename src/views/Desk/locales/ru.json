@@ -5,12 +5,15 @@
   "header": {
     "exit": "Выйти"
   },
+  "register": {
+    "title": "Регистрация",
+    "signup": "Зарегистрироваться"
+  },
   "login": {
     "title": "Войти в Manage app",
     "login": "Войти"
   },
-  "register": {
-    "title": "Регистрация",
-    "signup": "Зарегистрироваться"
+  "desks": {
+    "title": "Доски"
   }
 }

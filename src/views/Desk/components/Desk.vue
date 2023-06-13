@@ -29,7 +29,7 @@ const click = () => {
 <style lang="scss">
 .desk {
   display: flex;
-  width: 240px;
+  width: 140px;
   min-height: 40px;
   padding: 10px;
   border-radius: 6px;

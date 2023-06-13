@@ -26,8 +26,27 @@ const logout = async () => {
       <i-button variant="icon" size="md" icon-left="mdi-brightness-6" class="icon" />
     </i-header>
 
-    <main>
-      <router-view />
-    </main>
+    <div class="content-wrapper">
+      <aside class="menu">Menu</aside>
+
+      <main>
+        <router-view />
+      </main>
+    </div>
   </div>
 </template>
+
+<style lang="scss">
+.content-wrapper {
+  display: flex;
+  gap: 4px;
+  padding: 20px 16px;
+}
+.menu {
+  min-width: 20%;
+}
+
+main {
+  min-height: 100vh;
+}
+</style>

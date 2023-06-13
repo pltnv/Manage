@@ -1,30 +1,40 @@
 <script setup>
-import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column.vue";
 import Desk from "./components/Desk.vue";
 
-// mock data
-const tasks = ref([{ text: "Написать письмо" }, { text: "Отправить проект" }]);
+const personalTaskStore = usePersonalTaskStore();
+const router = useRouter();
 
-const clickDotsEmitHandler = () => {
-  console.log("emit: click dots");
-};
+let { columns } = personalTaskStore;
 
-const saveTaskEmitHandler = () => {
-  console.log("emit: click save new task");
+let openDesk = async (id) => {
+  await router.push({ name: "Desk", params: { id } });
 };
 </script>
 
 <template>
-  <div>
-    Desk page iherieirgi
-    <Column
-      :title="'Работа над проектом'"
-      :tasks="tasks"
-      @click:dots="clickDotsEmitHandler"
-      @click:saveTask="saveTaskEmitHandler"
-    />
-
-    <Desk title="Задачи" color="red" />
+  <div class="desks">
+    <h1>Desks</h1>
+    <div class="desks__wrapper">
+      <div v-for="(desk, index) in columns" :key="index">
+        <Desk :title="desk.title" color="red" @click="openDesk(index)" />
+      </div>
+    </div>
   </div>
 </template>
+
+<style lang="scss">
+.desks {
+  padding: 10px;
+
+  &__wrapper {
+    display: flex;
+    background: blue;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 4px;
+  }
+}
+</style>

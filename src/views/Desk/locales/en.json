@@ -5,12 +5,15 @@
   "header": {
     "exit": "Exit"
   },
+  "register": {
+    "title": "Registration",
+    "signup": "Sign up"
+  },
   "login": {
     "title": "Log in to the Manage app",
     "login": "Sign in"
   },
-  "register": {
-    "title": "Registration",
-    "signup": "Sign up"
+  "desks": {
+    "title": "Boards"
   }
 }
