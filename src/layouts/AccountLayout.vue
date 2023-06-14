@@ -41,6 +41,7 @@ const logout = async () => {
   display: flex;
   gap: 4px;
   padding: 20px 16px;
+  height: calc(100vh - 60px);
 }
 .menu {
   min-width: 20%;
@@ -48,5 +49,6 @@ const logout = async () => {
 
 main {
   min-height: 100vh;
+  width: 100%;
 }
 </style>

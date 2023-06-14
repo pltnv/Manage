@@ -7,19 +7,21 @@ import Desk from "./components/Desk.vue";
 const personalTaskStore = usePersonalTaskStore();
 const router = useRouter();
 
-let { columns } = personalTaskStore;
+let { boards } = personalTaskStore;
 
 let openDesk = async (id) => {
   await router.push({ name: "Desk", params: { id } });
 };
+
+console.log(boards);
 </script>
 
 <template>
   <div class="desks">
     <h1>Desks</h1>
     <div class="desks__wrapper">
-      <div v-for="(desk, index) in columns" :key="index">
-        <Desk :title="desk.title" color="red" @click="openDesk(index)" />
+      <div v-for="(board, index) in boards" :key="index">
+        <Desk :title="board.title" color="red" @click="openDesk(index)" />
       </div>
     </div>
   </div>
@@ -34,7 +36,7 @@ let openDesk = async (id) => {
     background: blue;
     gap: 14px;
     flex-wrap: wrap;
-    padding: 4px;
+    padding: 10px;
   }
 }
 </style>

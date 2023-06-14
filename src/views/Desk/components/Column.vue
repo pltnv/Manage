@@ -19,6 +19,8 @@ defineProps({
 
 const emit = defineEmits(["click:dots", "click:saveTask", "click:editTask"]);
 
+let newTask = ref("");
+
 let showAddContent = ref(false);
 const addTask = () => {
   showAddContent.value = !showAddContent.value;
@@ -28,8 +30,8 @@ const closeAddContent = () => {
   showAddContent.value = false;
 };
 
-const editTaskEmitHandler = () => {
-  emit("click:editTask");
+const editTaskEmitHandler = (taskIndex) => {
+  emit("click:editTask", taskIndex);
 };
 
 const clickDotsEmit = () => {
@@ -38,7 +40,8 @@ const clickDotsEmit = () => {
 
 const saveTaskEmit = () => {
   showAddContent.value = false;
-  emit("click:saveTask");
+  emit("click:saveTask", newTask.value);
+  newTask.value = "";
 };
 </script>
 
@@ -51,9 +54,9 @@ const saveTaskEmit = () => {
 
     <div class="desk-column__tasks">
       <div v-for="(task, index) in tasks" :key="index">
-        <Task :task="task.text" @click:editTask="editTaskEmitHandler" />
+        <Task :task="task" @click:editTask="editTaskEmitHandler(index)" />
       </div>
-      <textarea v-if="showAddContent" />
+      <textarea v-if="showAddContent" v-model="newTask" />
     </div>
 
     <i-button
