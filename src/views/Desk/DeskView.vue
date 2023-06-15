@@ -15,13 +15,13 @@ const clickDotsEmit = (boardIndex) => {
   console.log(boardIndex);
 };
 
-const clickEditEmit = (boardIndex, taskIndex) => {
-  console.log(boardIndex);
-  console.log(taskIndex);
+const clickEditEmit = (deskIndex, newTask) => {
+  const [taskIndex, newTaskText] = newTask;
+  personalTaskStore.editTask(currentBoardIndex.value, deskIndex, taskIndex, newTaskText);
 };
 
-const saveTaskEmit = (currentBoardIndex, deskIndex, newTaskText) => {
-  personalTaskStore.addTask(currentBoardIndex, deskIndex, newTaskText);
+const saveTaskEmit = (deskIndex, newTaskText) => {
+  personalTaskStore.addTask(currentBoardIndex.value, deskIndex, newTaskText);
 };
 </script>
 
@@ -37,7 +37,7 @@ const saveTaskEmit = (currentBoardIndex, deskIndex, newTaskText) => {
         :tasks="desk.tasks"
         @click:dots="clickDotsEmit(index)"
         @click:editTask="clickEditEmit(index, $event)"
-        @click:saveTask="saveTaskEmit(currentBoardIndex, index, $event)"
+        @click:saveTask="saveTaskEmit(index, $event)"
       />
     </div>
   </div>

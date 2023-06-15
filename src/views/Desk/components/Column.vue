@@ -30,8 +30,8 @@ const closeAddContent = () => {
   showAddContent.value = false;
 };
 
-const editTaskEmitHandler = (taskIndex) => {
-  emit("click:editTask", taskIndex);
+const editTaskEmitHandler = (taskIndex, newTaskText) => {
+  emit("click:editTask", [taskIndex, newTaskText]);
 };
 
 const clickDotsEmit = () => {
@@ -54,7 +54,7 @@ const saveTaskEmit = () => {
 
     <div class="desk-column__tasks">
       <div v-for="(task, index) in tasks" :key="index">
-        <Task :task="task" @click:editTask="editTaskEmitHandler(index)" />
+        <Task :task="task" @click:editTask="editTaskEmitHandler(index, $event)" />
       </div>
       <textarea v-if="showAddContent" v-model="newTask" />
     </div>

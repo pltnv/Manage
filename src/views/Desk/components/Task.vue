@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { ref } from "vue";
+
+const props = defineProps({
   task: {
     required: true,
     type: String
@@ -8,17 +10,31 @@ defineProps({
 
 const emit = defineEmits(["click:editTask"]);
 
-const editTask = () => {
-  emit("click:editTask");
+let isEdit = ref(false);
+let newTask = ref("");
+
+const openAddTask = () => {
+  isEdit.value = true;
+};
+
+const saveTask = () => {
+  emit("click:editTask", newTask.value);
+  isEdit.value = false;
 };
 </script>
 
 <template>
   <div class="task">
-    <div v-text="task" class="task__content" />
-    <div class="task__edit">
-      <button class="mdi mdi-pencil" @click="editTask" />
-    </div>
+    <template v-if="!isEdit">
+      <div v-text="task" class="task__content" />
+      <div class="task__edit">
+        <button class="mdi mdi-pencil" @click="openAddTask" />
+      </div>
+    </template>
+    <template v-else>
+      <i-input v-model="newTask" />
+      <button class="mdi mdi-content-save-outline" @click="saveTask" />
+    </template>
   </div>
 </template>
 
