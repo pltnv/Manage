@@ -21,18 +21,6 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     }
   ]);
 
-  // mock data
-  let columns = ref([
-    { title: "Учеба", tasks: [] },
-    { title: "Уник", tasks: [] },
-    { title: "Учеба", tasks: [] },
-    { title: "Уник", tasks: [] },
-    { title: "Учеба", tasks: [] },
-    { title: "Уник", tasks: [] },
-    { title: "Учеба", tasks: [] },
-    { title: "Уник", tasks: [] }
-  ]);
-
   // Boards
 
   const addBoard = (title) => {
@@ -43,11 +31,45 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     boards.value.push(newBoard);
   };
 
-  const removeBoard = (id) => {
-    const index = boards.value.findIndex((_, i) => i === id);
+  const removeBoard = (boardId) => {
+    const index = boards.value.findIndex((_, i) => i === boardId);
 
     if (index !== -1) {
       boards.value.splice(index, 1);
+    }
+  };
+
+  const renameBoard = (boardId, newTitle) => {
+    const index = boards.value.findIndex((_, i) => i === boardId);
+
+    if (index !== -1) {
+      boards.value[boardId].title = newTitle;
+    }
+  };
+
+  // Desks
+
+  const addDesk = (boardIndex, deskTitle) => {
+    const newDesk = {
+      title: deskTitle,
+      tasks: []
+    };
+    boards.value[boardIndex].push(newDesk);
+  };
+
+  const removeDesk = (boardIndex, deskIndex) => {
+    const index = boards.value[boardIndex].desks.findIndex((_, i) => i === deskIndex);
+
+    if (index !== -1) {
+      boards.value[boardIndex].desks.splice(deskIndex, 1);
+    }
+  };
+
+  const renameDesk = (boardIndex, deskIndex, newTitle) => {
+    const index = boards.value[boardIndex].desks.findIndex((_, i) => i === deskIndex);
+
+    if (index !== -1) {
+      boards.value[boardIndex].desks[deskIndex].title = newTitle;
     }
   };
 
@@ -57,15 +79,13 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     boards.value[boardIndex].desks[deskIndex].tasks.push(task);
   };
 
-  const removeTask = (taskId, boardId) => {
-    const board = columns.value.find((_, idx) => idx === boardId);
+  const removeTask = (boardId, deskIndex, taskIndex) => {
+    const index = boards.value[boardId].desks[deskIndex].tasks.findIndex(
+      (_, idx) => idx === taskIndex
+    );
 
-    if (board) {
-      const index = columns.value[boardId].tasks.findIndex((_, idx) => idx === taskId);
-
-      if (index !== -1) {
-        columns.value[boardId].tasks.splice(index, 1);
-      }
+    if (index !== -1) {
+      boards.value[boardId].desks[deskIndex].tasks.splice(index, 1);
     }
   };
 
@@ -77,9 +97,12 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
 
   return {
     boards,
-    columns,
     addBoard,
     removeBoard,
+    renameBoard,
+    addDesk,
+    removeDesk,
+    renameDesk,
     addTask,
     removeTask,
     editTask
