@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column.vue";
@@ -21,8 +21,11 @@ const clickEditEmit = (deskIndex, newTask) => {
 };
 
 const saveTaskEmit = (deskIndex, newTaskText) => {
-  personalTaskStore.addTask(currentBoardIndex.value, deskIndex, newTaskText);
+  if (newTaskText) {
+    personalTaskStore.addTask(currentBoardIndex.value, deskIndex, newTaskText);
+  }
 };
+let kek = ref("ffw");
 </script>
 
 <template>

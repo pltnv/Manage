@@ -23,11 +23,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
 
   // Boards
 
-  const addBoard = (title) => {
-    const newBoard = {
-      title,
-      desks: []
-    };
+  const addBoard = (newBoard) => {
     boards.value.push(newBoard);
   };
 

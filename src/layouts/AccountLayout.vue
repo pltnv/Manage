@@ -48,7 +48,7 @@ const logout = async () => {
 }
 
 main {
-  min-height: 100vh;
+  height: calc(100vh - 200px);
   width: 100%;
 }
 </style>

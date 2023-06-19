@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column.vue";
 import Desk from "./components/Desk.vue";
+import DropDown from "./components/DropDown.vue";
 
 const personalTaskStore = usePersonalTaskStore();
 const router = useRouter();
@@ -21,21 +22,27 @@ const addNewDesk = () => {
   showAddMenu.value = true;
 };
 
-const saveNewDesk = () => {
+const saveNewDesk = (newBoard) => {
+  console.log(newBoard);
+  if (newBoardName) {
+    showAddMenu.value = false;
+    addBoard(newBoard);
+  }
+};
+
+const closeAddMenu = () => {
   showAddMenu.value = false;
-  addBoard(newBoardName.value);
-  newBoardName.value = "";
 };
 </script>
 
 <template>
   <div class="desks">
-    <h1>Desks</h1>
-
-    <i-button label="Добавить новую доску" @click="addNewDesk" />
-    <div v-if="showAddMenu">
-      <i-input v-model="newBoardName" />
-      <i-button label="Сохранить новую доску" @click="saveNewDesk" />
+    <div class="desks__header">
+      <h1 v-text="$t('boards.title')" />
+      <div class="button-wrapper">
+        <i-button variant="icon" icon-left="mdi-plus" @click="addNewDesk" />
+        <drop-down v-if="showAddMenu" @close="closeAddMenu" @create="saveNewDesk" />
+      </div>
     </div>
 
     <div class="desks__wrapper">
@@ -49,13 +56,21 @@ const saveNewDesk = () => {
 <style lang="scss">
 .desks {
   padding: 10px;
+  height: 100%;
 
   &__wrapper {
+    position: relative;
     display: flex;
-    background: blue;
-    gap: 14px;
+    gap: 18px;
     flex-wrap: wrap;
     padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    // height: 100%;
+  }
+
+  &__header {
+    display: flex;
+    gap: 6px;
   }
 }
 </style>

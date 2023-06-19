@@ -13,7 +13,16 @@
     "title": "Log in to the Manage app",
     "login": "Sign in"
   },
-  "desks": {
-    "title": "Boards"
+  "boards": {
+    "title": "Boards",
+    "enterTitle": "Enter a title",
+    "boardTitle": "Title",
+    "actions": {
+      "create": "Create board",
+      "save": "Save"
+    }
+  },
+  "lists": {
+    "title": "Lists"
   }
 }

@@ -13,7 +13,16 @@
     "title": "Войти в Manage app",
     "login": "Войти"
   },
-  "desks": {
-    "title": "Доски"
+  "boards": {
+    "title": "Доски",
+    "enterTitle": "Введите название",
+    "boardTitle": "Название",
+    "actions": {
+      "create": "Создать доску",
+      "save": "Сохранить"
+    }
+  },
+  "lists": {
+    "title": "Списки"
   }
 }

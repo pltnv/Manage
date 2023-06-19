@@ -107,7 +107,7 @@ watch(
 <template>
   <div class="i-input" :class="classes">
     <input
-      v-model="localValue"
+      :value="localValue"
       :maxlength="maxlength"
       :autofocus="autofocus"
       :disabled="disabled"
@@ -121,6 +121,7 @@ watch(
     <div v-if="clearable && localValue.length && !disabled && !readonly">
       <i class="mdi mdi-close" @click="clear" />
     </div>
+
     <div class="info">
       <span v-if="count && amount > 0" v-text="amount" />
       <span v-if="count && maxlength"> / </span>
