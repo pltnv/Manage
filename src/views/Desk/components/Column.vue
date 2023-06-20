@@ -70,12 +70,13 @@ const clickTitle = () => {
         class="desk-column__title--text"
         @dblclick="clickTitle"
       />
+
       <i-input
         v-else
         :modelValue="title"
+        variant="underline"
         @update:modelValue="editTitleEmit($event)"
         @blur="isEditTitle = false"
-        variant="underline"
       />
       <i-button variant="icon" icon-left="mdi-dots-grid" @click="clickDotsEmit" />
     </div>
@@ -84,6 +85,7 @@ const clickTitle = () => {
       <div v-for="(task, index) in tasks" :key="index">
         <Task :task="task.task" @click:editTask="editTaskEmitHandler(index, $event)" />
       </div>
+
       <textarea v-if="showAddContent" v-model="newTask" />
     </div>
 
@@ -126,6 +128,7 @@ const clickTitle = () => {
     align-items: center;
     min-height: 30px;
     padding: 0 2px 0 2px;
+    cursor: pointer;
 
     button {
       margin-left: auto;

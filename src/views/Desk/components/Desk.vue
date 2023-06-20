@@ -28,12 +28,14 @@ const click = () => {
 
 <style lang="scss">
 .desk {
-  display: flex;
+  overflow: hidden;
   width: 140px;
   min-height: 40px;
   padding: 10px;
   border-radius: 6px;
   color: white;
   font-weight: bold;
+  white-space: wrap;
+  text-overflow: ellipsis;
 }
 </style>

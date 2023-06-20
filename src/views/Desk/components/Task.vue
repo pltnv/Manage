@@ -30,12 +30,21 @@ const closeEditing = () => {
     <template v-if="!isEdit">
       <div v-text="task" class="task__content" />
       <div class="task__edit">
-        <button class="mdi mdi-pencil" @click="openAddTask" />
+        <i-button variant="icon" class="mdi mdi-pencil" @click="openAddTask" />
       </div>
     </template>
+
     <template v-else>
-      <i-input :modelValue="task" @update:modelValue="saveTask($event)" />
-      <button class="mdi mdi-content-save-outline" @click="closeEditing" />
+      <i-input
+        :modelValue="task"
+        @update:modelValue="saveTask($event)"
+        @blur="closeEditing"
+      />
+      <i-button
+        variant="icon"
+        class="mdi mdi-content-save-outline"
+        @click="closeEditing"
+      />
     </template>
   </div>
 </template>
@@ -43,11 +52,11 @@ const closeEditing = () => {
 <style lang="scss">
 .task {
   display: flex;
+  align-items: center;
   gap: 4px;
   width: 250px;
   border-radius: 10px;
   min-height: 20px;
-  max-height: 40px;
   padding: 10px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
@@ -61,8 +70,12 @@ const closeEditing = () => {
     }
   }
 
+  .task__edit {
+    cursor: pointer;
+  }
+
   &__content {
-    padding-right: 14px;
+    padding-right: 4px;
   }
 
   &__edit {
