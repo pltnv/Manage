@@ -11,14 +11,16 @@ const props = defineProps({
 const emit = defineEmits(["click:editTask"]);
 
 let isEdit = ref(false);
-let newTask = ref("");
 
 const openAddTask = () => {
   isEdit.value = true;
 };
 
-const saveTask = () => {
-  emit("click:editTask", newTask.value);
+const saveTask = (newText) => {
+  emit("click:editTask", newText);
+};
+
+const closeEditing = () => {
   isEdit.value = false;
 };
 </script>
@@ -32,8 +34,8 @@ const saveTask = () => {
       </div>
     </template>
     <template v-else>
-      <i-input v-model="newTask" />
-      <button class="mdi mdi-content-save-outline" @click="saveTask" />
+      <i-input :modelValue="task" @update:modelValue="saveTask($event)" />
+      <button class="mdi mdi-content-save-outline" @click="closeEditing" />
     </template>
   </div>
 </template>

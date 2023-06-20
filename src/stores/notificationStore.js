@@ -5,7 +5,7 @@ export const useNotificationStore = defineStore("notificationStore", () => {
   let notifications = ref([]);
 
   const addNotification = (message, type, timeout) => {
-    const id = new Date();
+    const id = new Date().toLocaleString();
     notifications.value.push({ id, message, type });
 
     if (timeout) {

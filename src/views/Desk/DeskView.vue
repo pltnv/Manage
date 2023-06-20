@@ -25,7 +25,11 @@ const saveTaskEmit = (deskIndex, newTaskText) => {
     personalTaskStore.addTask(currentBoardIndex.value, deskIndex, newTaskText);
   }
 };
-let kek = ref("ffw");
+
+const editTitleEmit = (newTitle) => {
+  const [newTitleText, oldTitle] = newTitle;
+  personalTaskStore.renameDesk(currentBoardIndex.value, oldTitle, newTitleText);
+};
 </script>
 
 <template>
@@ -38,6 +42,7 @@ let kek = ref("ffw");
       <Column
         :title="desk.title"
         :tasks="desk.tasks"
+        @click:editTitle="editTitleEmit($event)"
         @click:dots="clickDotsEmit(index)"
         @click:editTask="clickEditEmit(index, $event)"
         @click:saveTask="saveTaskEmit(index, $event)"

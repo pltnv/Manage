@@ -8,23 +8,43 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     {
       title: "University",
       desks: [
-        { title: "To do", tasks: ["Learn the poem", "Make a presentation"] },
-        { title: "In progress", tasks: ["Solve the task"] }
-      ]
+        // { title: "To do", tasks: ["Learn the poem", "Make a presentation"] },
+        {
+          title: "To do",
+          tasks: [
+            { task: "Learn the poem", date: "18.06.2023, 18:30:19" },
+            { task: "Make a presentation", date: "18.06.2023, 18:36:19" }
+          ]
+        },
+        {
+          title: "In progress",
+          tasks: [{ task: "Solve the task", date: "18.06.2023, 18:49:19" }]
+        }
+      ],
+      date: "18.06.2023, 18:05:19",
+      color: "green"
     },
     {
       title: "Work",
       desks: [
-        { title: "To do", tasks: ["Implement postgress"] },
-        { title: "In progress", tasks: ["Add scss to project"] }
-      ]
+        {
+          title: "To do",
+          tasks: [{ task: "Implement postgress", date: "19.06.2023, 18:10:19" }]
+        },
+        {
+          title: "In progress",
+          tasks: [{ task: "Add scss to project", date: "19.06.2023, 18:40:19" }]
+        }
+      ],
+      date: "19.06.2023, 18:05:19",
+      color: "blue"
     }
   ]);
 
   // Boards
 
   const addBoard = (newBoard) => {
-    boards.value.push(newBoard);
+    boards.value.push({ ...newBoard, desks: [], date: new Date().toLocaleString() });
   };
 
   const removeBoard = (boardId) => {
@@ -61,18 +81,23 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     }
   };
 
-  const renameDesk = (boardIndex, deskIndex, newTitle) => {
-    const index = boards.value[boardIndex].desks.findIndex((_, i) => i === deskIndex);
+  const renameDesk = (boardIndex, oldTitle, newTitle) => {
+    const index = boards.value[boardIndex].desks.findIndex(
+      (desk) => desk.title === oldTitle
+    );
 
-    if (index !== -1) {
-      boards.value[boardIndex].desks[deskIndex].title = newTitle;
+    if (index > -1) {
+      boards.value[boardIndex].desks[index].title = newTitle;
     }
   };
 
   // Tasks
 
-  const addTask = (boardIndex, deskIndex, task) => {
-    boards.value[boardIndex].desks[deskIndex].tasks.push(task);
+  const addTask = (boardIndex, deskIndex, taskText) => {
+    boards.value[boardIndex].desks[deskIndex].tasks.push({
+      task: taskText,
+      date: new Date().toLocaleString()
+    });
   };
 
   const removeTask = (boardId, deskIndex, taskIndex) => {
@@ -86,7 +111,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   const editTask = (boardIndex, deskIndex, taskIndex, newText) => {
-    boards.value[boardIndex].desks[deskIndex].tasks.splice(taskIndex, 1, newText);
+    boards.value[boardIndex].desks[deskIndex].tasks[taskIndex].task = newText;
   };
 
   useLocalStorage(boards, "boards", true);

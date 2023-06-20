@@ -161,7 +161,7 @@ watch(
     box-shadow: none;
 
     &:focus {
-      border: 1px solid black;
+      border: none;
     }
 
     &:hover {
@@ -183,7 +183,7 @@ watch(
     }
 
     &:hover {
-      border-color: black;
+      border-bottom: 1px solid black;
     }
 
     &.error {

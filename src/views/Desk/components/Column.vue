@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import Task from "../components/Task.vue";
 
-defineProps({
+const props = defineProps({
   title: {
     required: true,
     type: String
@@ -17,9 +17,15 @@ defineProps({
   }
 });
 
-const emit = defineEmits(["click:dots", "click:saveTask", "click:editTask"]);
+const emit = defineEmits([
+  "click:dots",
+  "click:saveTask",
+  "click:editTask",
+  "click:editTitle"
+]);
 
 let newTask = ref("");
+let isEditTitle = ref(false);
 
 let showAddContent = ref(false);
 const addTask = () => {
@@ -30,12 +36,13 @@ const closeAddContent = () => {
   showAddContent.value = false;
 };
 
-const editTaskEmitHandler = (taskIndex, newTaskText) => {
-  emit("click:editTask", [taskIndex, newTaskText]);
-};
-
 const clickDotsEmit = () => {
   emit("click:dots");
+};
+
+// Tasks
+const editTaskEmitHandler = (taskIndex, newTaskText) => {
+  emit("click:editTask", [taskIndex, newTaskText]);
 };
 
 const saveTaskEmit = () => {
@@ -43,18 +50,39 @@ const saveTaskEmit = () => {
   emit("click:saveTask", newTask.value);
   newTask.value = "";
 };
+
+//Desks
+const editTitleEmit = (newTitle) => {
+  emit("click:editTitle", [newTitle, props.title]);
+};
+
+const clickTitle = () => {
+  isEditTitle.value = true;
+};
 </script>
 
 <template>
   <div class="desk-column" :style="{ background: bgc }">
     <div class="desk-column__title">
-      <div v-text="title" />
+      <div
+        v-if="!isEditTitle"
+        v-text="title"
+        class="desk-column__title--text"
+        @dblclick="clickTitle"
+      />
+      <i-input
+        v-else
+        :modelValue="title"
+        @update:modelValue="editTitleEmit($event)"
+        @blur="isEditTitle = false"
+        variant="underline"
+      />
       <i-button variant="icon" icon-left="mdi-dots-grid" @click="clickDotsEmit" />
     </div>
 
     <div class="desk-column__tasks">
       <div v-for="(task, index) in tasks" :key="index">
-        <Task :task="task" @click:editTask="editTaskEmitHandler(index, $event)" />
+        <Task :task="task.task" @click:editTask="editTaskEmitHandler(index, $event)" />
       </div>
       <textarea v-if="showAddContent" v-model="newTask" />
     </div>
@@ -101,6 +129,10 @@ const saveTaskEmit = () => {
 
     button {
       margin-left: auto;
+    }
+
+    &--text {
+      user-select: none;
     }
   }
 

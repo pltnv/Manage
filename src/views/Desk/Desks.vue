@@ -47,7 +47,7 @@ const closeAddMenu = () => {
 
     <div class="desks__wrapper">
       <div v-for="(board, index) in boards" :key="index">
-        <Desk :title="board.title" color="red" @click="openDesk(index)" />
+        <Desk :title="board.title" :color="board.color" @click="openDesk(index)" />
       </div>
     </div>
   </div>
