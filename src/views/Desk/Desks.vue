@@ -15,15 +15,16 @@ let showAddMenu = ref(false);
 let isSearch = ref(false);
 let searchValue = ref("");
 let newBoardName = ref("");
+let sortValue = ref("");
 
 let filteredBoards = computed(() => {
-  if (!searchValue.value) {
-    return boards;
+  if (searchValue.value) {
+    return boards.filter((board) => {
+      return board.title.toLowerCase().includes(searchValue.value.toLowerCase());
+    });
   }
 
-  return boards.filter((board) => {
-    return board.title.toLowerCase().includes(searchValue.value.toLowerCase());
-  });
+  return boards;
 });
 
 const openDesk = async (id) => {
