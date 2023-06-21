@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column.vue";
@@ -12,7 +12,19 @@ const router = useRouter();
 let { boards, addBoard } = personalTaskStore;
 
 let showAddMenu = ref(false);
+let isSearch = ref(false);
+let searchValue = ref("");
 let newBoardName = ref("");
+
+let filteredBoards = computed(() => {
+  if (!searchValue.value) {
+    return boards;
+  }
+
+  return boards.filter((board) => {
+    return board.title.toLowerCase().includes(searchValue.value.toLowerCase());
+  });
+});
 
 const openDesk = async (id) => {
   await router.push({ name: "Desk", params: { id } });
@@ -46,7 +58,7 @@ const closeAddMenu = () => {
     </div>
 
     <div class="desks__wrapper">
-      <div v-for="(board, index) in boards" :key="index">
+      <div v-for="(board, index) in filteredBoards" :key="index">
         <Desk :title="board.title" :color="board.color" @click="openDesk(index)" />
       </div>
     </div>
