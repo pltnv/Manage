@@ -38,6 +38,7 @@ const editTitleEmit = (newTitle) => {
 
 <template>
   <div class="desk-view">
+    <!-- to fix -->
     <div>
       {{ boardName }}
     </div>

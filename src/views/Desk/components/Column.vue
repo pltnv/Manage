@@ -62,7 +62,13 @@ const clickTitle = () => {
 </script>
 
 <template>
-  <div class="desk-column" :style="{ background: bgc }">
+  <div
+    :draggable="true"
+    @dragenter.prevent
+    @dragover.prevent
+    class="desk-column"
+    :style="{ background: bgc }"
+  >
     <div class="desk-column__title">
       <div
         v-if="!isEditTitle"
@@ -82,9 +88,9 @@ const clickTitle = () => {
     </div>
 
     <div class="desk-column__tasks">
-      <div v-for="(task, index) in tasks" :key="index">
+      <template v-for="(task, index) in tasks" :key="index">
         <Task :task="task.task" @click:editTask="editTaskEmitHandler(index, $event)" />
-      </div>
+      </template>
 
       <textarea v-if="showAddContent" v-model="newTask" />
     </div>

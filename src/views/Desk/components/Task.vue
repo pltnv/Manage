@@ -26,7 +26,7 @@ const closeEditing = () => {
 </script>
 
 <template>
-  <div class="task">
+  <div class="task" :draggable="true" @dragenter.prevent @dragover.prevent>
     <template v-if="!isEdit">
       <div v-text="task" class="task__content" />
       <div class="task__edit">
