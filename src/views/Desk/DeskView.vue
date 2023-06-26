@@ -11,6 +11,10 @@ const personalTaskStore = usePersonalTaskStore();
 let { boards } = personalTaskStore;
 let currentBoardIndex = computed(() => route.params.id);
 
+let boardName = computed(() => {
+  return route.query?.board;
+});
+
 const clickDotsEmit = (boardIndex) => {
   console.log(boardIndex);
 };
@@ -34,19 +38,25 @@ const editTitleEmit = (newTitle) => {
 
 <template>
   <div class="desk-view">
-    <div
-      v-for="(desk, index) in boards[currentBoardIndex].desks"
-      :key="index"
-      class="desk-view__desks"
-    >
-      <Column
-        :title="desk.title"
-        :tasks="desk.tasks"
-        @click:editTitle="editTitleEmit($event)"
-        @click:dots="clickDotsEmit(index)"
-        @click:editTask="clickEditEmit(index, $event)"
-        @click:saveTask="saveTaskEmit(index, $event)"
-      />
+    <div>
+      {{ boardName }}
+    </div>
+
+    <div class="desk-view__main">
+      <div
+        v-for="(desk, index) in boards[currentBoardIndex].desks"
+        :key="index"
+        class="desk-view__desks"
+      >
+        <Column
+          :title="desk.title"
+          :tasks="desk.tasks"
+          @click:editTitle="editTitleEmit($event)"
+          @click:dots="clickDotsEmit(index)"
+          @click:editTask="clickEditEmit(index, $event)"
+          @click:saveTask="saveTaskEmit(index, $event)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +64,12 @@ const editTitleEmit = (newTitle) => {
 <style lang="scss">
 .desk-view {
   display: flex;
+  flex-direction: column;
   gap: 10px;
+
+  &__main {
+    display: flex;
+    gap: 10px;
+  }
 }
 </style>

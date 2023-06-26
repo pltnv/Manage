@@ -20,7 +20,8 @@
     "actions": {
       "create": "Create board",
       "save": "Save"
-    }
+    },
+    "search": "Search..."
   },
   "lists": {
     "title": "Lists"

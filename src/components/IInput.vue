@@ -4,7 +4,10 @@ import { computed, ref, watch } from "vue";
 const props = defineProps({
   id: String,
   name: String,
-  modelValue: String,
+  modelValue: {
+    required: true,
+    type: String
+  },
   autofocus: Boolean,
   disabled: Boolean,
   readonly: Boolean,
@@ -158,7 +161,7 @@ watch(
     gap: 4px;
     position: relative;
     width: 100%;
-    height: 30px;
+    height: px;
     padding: 6px;
     border: 1px solid transparent;
     border-radius: 10px;

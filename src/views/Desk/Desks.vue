@@ -12,7 +12,7 @@ const router = useRouter();
 let { boards, addBoard } = personalTaskStore;
 
 let showAddMenu = ref(false);
-let isSearch = ref(false);
+let showSearch = ref(false);
 let searchValue = ref("");
 let newBoardName = ref("");
 let sortValue = ref("");
@@ -27,8 +27,8 @@ let filteredBoards = computed(() => {
   return boards;
 });
 
-const openDesk = async (id) => {
-  await router.push({ name: "Desk", params: { id } });
+const openDesk = async (id, boardName) => {
+  await router.push({ name: "Desk", params: { id }, query: { board: boardName } });
 };
 
 const addNewDesk = () => {
@@ -46,6 +46,10 @@ const saveNewDesk = (newBoard) => {
 const closeAddMenu = () => {
   showAddMenu.value = false;
 };
+
+const toggleSearch = () => {
+  showSearch.value = !showSearch.value;
+};
 </script>
 
 <template>
@@ -56,20 +60,43 @@ const closeAddMenu = () => {
         <i-button variant="icon" icon-left="mdi-plus" @click="addNewDesk" />
         <drop-down v-if="showAddMenu" @close="closeAddMenu" @create="saveNewDesk" />
       </div>
+      <i-button variant="icon" icon-left="mdi-magnify" @click="toggleSearch" />
+      <i-input
+        v-if="showSearch"
+        v-model="searchValue"
+        :placeholder="$t('boards.search')"
+        clearable
+        autofocus
+      />
     </div>
 
     <div class="desks__wrapper">
-      <div v-for="(board, index) in filteredBoards" :key="index">
-        <Desk :title="board.title" :color="board.color" @click="openDesk(index)" />
-      </div>
+      <template v-for="(board, index) in filteredBoards" :key="index">
+        <Desk
+          :title="board.title"
+          :color="board.color"
+          @click="openDesk(index, board.title)"
+        />
+      </template>
     </div>
   </div>
 </template>
 
 <style lang="scss">
 .desks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   padding: 10px;
-  height: 100%;
+  height: 100vh;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid black;
+    padding: 8px 4px;
+  }
 
   &__wrapper {
     position: relative;
@@ -78,12 +105,6 @@ const closeAddMenu = () => {
     flex-wrap: wrap;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    // height: 100%;
-  }
-
-  &__header {
-    display: flex;
-    gap: 6px;
   }
 }
 </style>
