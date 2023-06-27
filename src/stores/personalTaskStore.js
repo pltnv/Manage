@@ -114,6 +114,17 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     boards.value[boardIndex].desks[deskIndex].tasks[taskIndex].task = newText;
   };
 
+  const moveTask = (
+    boardIndex,
+    oldDeskIndex,
+    newDeskIndex,
+    oldTaskIndex,
+    newIndex,
+    task
+  ) => {
+    console.log("move");
+  };
+
   useLocalStorage(boards, "boards", true);
 
   return {
@@ -126,6 +137,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     renameDesk,
     addTask,
     removeTask,
-    editTask
+    editTask,
+    moveTask
   };
 });

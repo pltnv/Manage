@@ -59,6 +59,15 @@ const editTitleEmit = (newTitle) => {
 const clickTitle = () => {
   isEditTitle.value = true;
 };
+
+const dragStart = (e, task, oldIndex) => {
+  e.dataTransfer.setData("task", JSON.stringify(task));
+  e.dataTransfer.setData("oldTaskIndex", oldIndex);
+};
+
+const drop = (e) => {
+  console.log(JSON.parse(e.dataTransfer.getData("task")).task);
+};
 </script>
 
 <template>
@@ -89,7 +98,15 @@ const clickTitle = () => {
 
     <div class="desk-column__tasks">
       <template v-for="(task, index) in tasks" :key="index">
-        <Task :task="task.task" @click:editTask="editTaskEmitHandler(index, $event)" />
+        <Task
+          :draggable="true"
+          :task="task.task"
+          @dragenter.prevent
+          @dragover.prevent
+          @dragstart="dragStart($event, task, index)"
+          @drop="drop($event)"
+          @click:editTask="editTaskEmitHandler(index, $event)"
+        />
       </template>
 
       <textarea v-if="showAddContent" v-model="newTask" />
