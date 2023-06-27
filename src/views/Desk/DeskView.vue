@@ -34,6 +34,18 @@ const editTitleEmit = (newTitle) => {
   const [newTitleText, oldTitle] = newTitle;
   personalTaskStore.renameDesk(currentBoardIndex.value, oldTitle, newTitleText);
 };
+
+const dropHandler = (e, deskIndex) => {
+  const [oldIndex, newIndex, task] = e;
+  console.log(
+    "dropHandler",
+    oldIndex,
+    newIndex,
+    task,
+    deskIndex,
+    currentBoardIndex.value
+  );
+};
 </script>
 
 <template>
@@ -56,6 +68,7 @@ const editTitleEmit = (newTitle) => {
           @click:dots="clickDotsEmit(index)"
           @click:editTask="clickEditEmit(index, $event)"
           @click:saveTask="saveTaskEmit(index, $event)"
+          @drop:event="dropHandler($event, index)"
         />
       </div>
     </div>

@@ -21,7 +21,8 @@ const emit = defineEmits([
   "click:dots",
   "click:saveTask",
   "click:editTask",
-  "click:editTitle"
+  "click:editTitle",
+  "drop:event"
 ]);
 
 let newTask = ref("");
@@ -65,8 +66,11 @@ const dragStart = (e, task, oldIndex) => {
   e.dataTransfer.setData("oldTaskIndex", oldIndex);
 };
 
-const drop = (e) => {
-  console.log(JSON.parse(e.dataTransfer.getData("task")).task);
+const drop = (e, newIndex) => {
+  let oldIndex = e.dataTransfer.getData("oldTaskIndex");
+  let task = JSON.parse(e.dataTransfer.getData("task")).task;
+  console.log("pozdsa");
+  emit("drop:event", [oldIndex, newIndex, task]);
 };
 </script>
 
@@ -104,7 +108,7 @@ const drop = (e) => {
           @dragenter.prevent
           @dragover.prevent
           @dragstart="dragStart($event, task, index)"
-          @drop="drop($event)"
+          @drop="drop($event, index)"
           @click:editTask="editTaskEmitHandler(index, $event)"
         />
       </template>

@@ -50,6 +50,10 @@ const closeAddMenu = () => {
 const toggleSearch = () => {
   showSearch.value = !showSearch.value;
 };
+
+const drag = (e) => {
+  console.log("из desks", e);
+};
 </script>
 
 <template>
@@ -73,6 +77,7 @@ const toggleSearch = () => {
     <div class="desks__wrapper">
       <template v-for="(board, index) in filteredBoards" :key="index">
         <Desk
+          @drag.stop="drag($event)"
           :title="board.title"
           :color="board.color"
           @click="openDesk(index, board.title)"
