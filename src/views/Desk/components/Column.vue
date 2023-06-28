@@ -69,7 +69,6 @@ const dragStart = (e, task, oldIndex) => {
 const drop = (e, newIndex) => {
   let oldIndex = e.dataTransfer.getData("oldTaskIndex");
   let task = JSON.parse(e.dataTransfer.getData("task")).task;
-  console.log("pozdsa");
   emit("drop:event", [oldIndex, newIndex, task]);
 };
 </script>

@@ -49,6 +49,7 @@ const closeAddMenu = () => {
 
 const toggleSearch = () => {
   showSearch.value = !showSearch.value;
+  searchValue.value = "";
 };
 
 const drag = (e) => {

@@ -39,12 +39,18 @@ const dropHandler = (e, deskIndex) => {
   const [oldIndex, newIndex, task] = e;
   console.log(
     "dropHandler",
+    "oldIndex",
     oldIndex,
+    "new index",
     newIndex,
+    "task",
     task,
+    "deskIndex",
     deskIndex,
+    "currentBoard",
     currentBoardIndex.value
   );
+  personalTaskStore.moveTask(currentBoardIndex.value, deskIndex, oldIndex, newIndex);
 };
 </script>
 
