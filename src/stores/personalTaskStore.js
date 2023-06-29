@@ -114,13 +114,27 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     boards.value[boardIndex].desks[deskIndex].tasks[taskIndex].task = newText;
   };
 
-  const moveTask = (boardIndex, oldDeskIndex, oldTaskIndex, newTaskIndex) => {
-    // console.log(boardIndex, oldDeskIndex, oldTaskIndex, newTaskIndex);
+  const moveTask = (boardIndex, newDeskIndex, oldTaskIndex, task, newTaskIndex) => {
+    const oldDeskIndex = boards.value[boardIndex].desks.findIndex((desk) =>
+      desk.tasks.some((t) => t.text === task.text && t.date === task.date)
+    );
 
-    const task = boards.value[boardIndex].desks[oldDeskIndex].tasks[oldTaskIndex];
+    if (newDeskIndex === oldDeskIndex && newTaskIndex !== undefined) {
+      boards.value[boardIndex].desks[oldDeskIndex].tasks.splice(oldTaskIndex, 1);
+      boards.value[boardIndex].desks[oldDeskIndex].tasks.splice(newTaskIndex, 0, task);
+      return;
+    }
 
-    boards.value[boardIndex].desks[oldDeskIndex].tasks.splice(oldTaskIndex, 1);
-    boards.value[boardIndex].desks[oldDeskIndex].tasks.splice(newTaskIndex, 0, task);
+    if (newDeskIndex !== oldDeskIndex) {
+      boards.value[boardIndex].desks[oldDeskIndex].tasks.splice(oldTaskIndex, 1);
+
+      if (newTaskIndex !== undefined) {
+        boards.value[boardIndex].desks[newDeskIndex].tasks.splice(newTaskIndex, 0, task);
+      } else {
+        boards.value[boardIndex].desks[newDeskIndex].tasks.push(task);
+      }
+      return;
+    }
   };
 
   useLocalStorage(boards, "boards", true);

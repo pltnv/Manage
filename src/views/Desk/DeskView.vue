@@ -35,22 +35,21 @@ const editTitleEmit = (newTitle) => {
   personalTaskStore.renameDesk(currentBoardIndex.value, oldTitle, newTitleText);
 };
 
-const dropHandler = (e, deskIndex) => {
+const dropTaskHandler = (e, deskIndex) => {
   const [oldIndex, newIndex, task] = e;
-  console.log(
-    "dropHandler",
-    "oldIndex",
-    oldIndex,
-    "new index",
-    newIndex,
-    "task",
-    task,
-    "deskIndex",
+  personalTaskStore.moveTask(
+    currentBoardIndex.value,
     deskIndex,
-    "currentBoard",
-    currentBoardIndex.value
+    oldIndex,
+    task,
+    newIndex
   );
-  personalTaskStore.moveTask(currentBoardIndex.value, deskIndex, oldIndex, newIndex);
+};
+
+const dropHandler = (e, deskIndex) => {
+  let task = JSON.parse(e.dataTransfer.getData("task"));
+  let oldIndex = e.dataTransfer.getData("oldTaskIndex");
+  personalTaskStore.moveTask(currentBoardIndex.value, deskIndex, oldIndex, task);
 };
 </script>
 
@@ -74,7 +73,8 @@ const dropHandler = (e, deskIndex) => {
           @click:dots="clickDotsEmit(index)"
           @click:editTask="clickEditEmit(index, $event)"
           @click:saveTask="saveTaskEmit(index, $event)"
-          @drop:event="dropHandler($event, index)"
+          @drop:event="dropTaskHandler($event, index)"
+          @drop="dropHandler($event, index)"
         />
       </div>
     </div>
