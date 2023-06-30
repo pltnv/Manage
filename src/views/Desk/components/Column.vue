@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import Task from "../components/Task.vue";
+import Task from "./Task.vue";
+import ViewTask from "./ViewTask.vue";
 
 const props = defineProps({
   title: {
@@ -27,6 +28,8 @@ const emit = defineEmits([
 
 let newTask = ref("");
 let isEditTitle = ref(false);
+let showTaskView = ref(false);
+let selectedTaskIndex = ref(-1);
 
 let showAddContent = ref(false);
 const addTask = () => {
@@ -66,7 +69,7 @@ const dragStart = (e, task, oldIndex) => {
   e.dataTransfer.setData("oldTaskIndex", oldIndex);
 
   setTimeout(() => {
-    e.target.style.display = "none";
+    e.target.style.display = "none"; // provides hiding when drag event starts
   });
 };
 
@@ -80,6 +83,16 @@ const drop = (e, newIndex) => {
   let oldIndex = e.dataTransfer.getData("oldTaskIndex");
   let task = JSON.parse(e.dataTransfer.getData("task"));
   emit("drop:task", [oldIndex, newIndex, task]);
+};
+
+const openTask = (index) => {
+  showTaskView.value = true;
+  selectedTaskIndex.value = index;
+};
+
+const closeTask = () => {
+  showTaskView.value = false;
+  selectedTaskIndex.value = -1;
 };
 </script>
 
@@ -120,6 +133,12 @@ const drop = (e, newIndex) => {
           @drop.stop="drop($event, index)"
           @dragend="dragEnd($event)"
           @click:editTask="editTaskEmitHandler(index, $event)"
+          @click="openTask(index)"
+        />
+        <view-task
+          v-if="showTaskView && selectedTaskIndex === index"
+          :task="task"
+          @close="closeTask"
         />
       </template>
 

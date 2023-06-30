@@ -8,7 +8,6 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     {
       title: "University",
       desks: [
-        // { title: "To do", tasks: ["Learn the poem", "Make a presentation"] },
         {
           title: "To do",
           tasks: [
