@@ -64,6 +64,16 @@ const clickTitle = () => {
 const dragStart = (e, task, oldIndex) => {
   e.dataTransfer.setData("task", JSON.stringify(task));
   e.dataTransfer.setData("oldTaskIndex", oldIndex);
+
+  setTimeout(() => {
+    e.target.style.display = "none";
+  });
+};
+
+const dragEnd = (e) => {
+  setTimeout(() => {
+    e.target.style.display = "flex";
+  });
 };
 
 const drop = (e, newIndex) => {
@@ -108,6 +118,7 @@ const drop = (e, newIndex) => {
           @dragover.prevent
           @dragstart.stop="dragStart($event, task, index)"
           @drop.stop="drop($event, index)"
+          @dragend="dragEnd($event)"
           @click:editTask="editTaskEmitHandler(index, $event)"
         />
       </template>
