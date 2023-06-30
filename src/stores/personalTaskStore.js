@@ -114,6 +114,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     boards.value[boardIndex].desks[deskIndex].tasks[taskIndex].task = newText;
   };
 
+  // Drag&drop for tasks
   const moveTask = (boardIndex, newDeskIndex, oldTaskIndex, task, newTaskIndex) => {
     const oldDeskIndex = boards.value[boardIndex].desks.findIndex((desk) =>
       desk.tasks.some((t) => t.text === task.text && t.date === task.date)
@@ -137,6 +138,14 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     }
   };
 
+  // Drag&drop for desks
+  const moveDesk = (boardIndex, newDeskIndex, oldDeskIndex) => {
+    const desk = boards.value[boardIndex].desks[oldDeskIndex];
+
+    boards.value[boardIndex].desks.splice(oldDeskIndex, 1);
+    boards.value[boardIndex].desks.splice(newDeskIndex, 0, desk);
+  };
+
   useLocalStorage(boards, "boards", true);
 
   return {
@@ -150,6 +159,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     addTask,
     removeTask,
     editTask,
-    moveTask
+    moveTask,
+    moveDesk
   };
 });

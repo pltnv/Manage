@@ -22,7 +22,7 @@ const emit = defineEmits([
   "click:saveTask",
   "click:editTask",
   "click:editTitle",
-  "drop:event"
+  "drop:task"
 ]);
 
 let newTask = ref("");
@@ -69,7 +69,7 @@ const dragStart = (e, task, oldIndex) => {
 const drop = (e, newIndex) => {
   let oldIndex = e.dataTransfer.getData("oldTaskIndex");
   let task = JSON.parse(e.dataTransfer.getData("task"));
-  emit("drop:event", [oldIndex, newIndex, task]);
+  emit("drop:task", [oldIndex, newIndex, task]);
 };
 </script>
 
@@ -106,8 +106,8 @@ const drop = (e, newIndex) => {
           :task="task.task"
           @dragenter.prevent
           @dragover.prevent
-          @dragstart="dragStart($event, task, index)"
-          @drop="drop($event, index)"
+          @dragstart.stop="dragStart($event, task, index)"
+          @drop.stop="drop($event, index)"
           @click:editTask="editTaskEmitHandler(index, $event)"
         />
       </template>

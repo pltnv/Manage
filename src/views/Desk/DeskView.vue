@@ -44,12 +44,23 @@ const dropTaskHandler = (e, deskIndex) => {
     task,
     newIndex
   );
+  console.log("1");
 };
 
 const dropHandler = (e, deskIndex) => {
-  let task = JSON.parse(e.dataTransfer.getData("task"));
-  let oldIndex = e.dataTransfer.getData("oldTaskIndex");
-  personalTaskStore.moveTask(currentBoardIndex.value, deskIndex, oldIndex, task);
+  try {
+    let task = JSON.parse(e.dataTransfer.getData("task"));
+    let oldIndex = e.dataTransfer.getData("oldTaskIndex");
+
+    personalTaskStore.moveTask(currentBoardIndex.value, deskIndex, oldIndex, task);
+  } catch {
+    let deskOldIndex = e.dataTransfer.getData("deskOldIndex");
+    personalTaskStore.moveDesk(currentBoardIndex.value, deskIndex, deskOldIndex);
+  }
+};
+
+const dragHandler = (e, deskIndex) => {
+  e.dataTransfer.setData("deskOldIndex", deskIndex);
 };
 </script>
 
@@ -73,8 +84,9 @@ const dropHandler = (e, deskIndex) => {
           @click:dots="clickDotsEmit(index)"
           @click:editTask="clickEditEmit(index, $event)"
           @click:saveTask="saveTaskEmit(index, $event)"
-          @drop:event="dropTaskHandler($event, index)"
+          @drop:task="dropTaskHandler($event, index)"
           @drop="dropHandler($event, index)"
+          @dragstart="dragHandler($event, index)"
         />
       </div>
     </div>
