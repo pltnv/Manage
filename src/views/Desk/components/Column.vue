@@ -135,11 +135,15 @@ const closeTask = () => {
           @click:editTask="editTaskEmitHandler(index, $event)"
           @click="openTask(index)"
         />
-        <view-task
-          v-if="showTaskView && selectedTaskIndex === index"
-          :task="task"
-          @close="closeTask"
-        />
+
+        <i-modal
+          v-if="selectedTaskIndex === index"
+          :title="task.task"
+          size="md"
+          v-model="showTaskView"
+        >
+          <view-task :task="task" @close="closeTask" />
+        </i-modal>
       </template>
 
       <textarea v-if="showAddContent" v-model="newTask" />
