@@ -24,8 +24,6 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue", "accept", "cancel"]);
 
-let modalVisible = ref(props.value);
-
 const close = () => {
   emit("update:modelValue", false);
 };
@@ -102,6 +100,7 @@ const cancel = () => {
   background-color: white;
   border-radius: 18px;
   padding: 10px 20px;
+  gap: 10px;
 
   &--dialog {
     width: 500px;

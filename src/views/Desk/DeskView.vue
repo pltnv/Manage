@@ -35,6 +35,10 @@ const editTitleEmit = (newTitle) => {
   personalTaskStore.renameDesk(currentBoardIndex.value, oldTitle, newTitleText);
 };
 
+const deleteTaskEmit = (deskIndex, taskIndex) => {
+  personalTaskStore.removeTask(currentBoardIndex.value, deskIndex, taskIndex);
+};
+
 const dropTaskHandler = (e, deskIndex) => {
   const [oldIndex, newIndex, task] = e;
   personalTaskStore.moveTask(
@@ -84,6 +88,7 @@ const dragHandler = (e, deskIndex) => {
           @click:dots="clickDotsEmit(index)"
           @click:editTask="clickEditEmit(index, $event)"
           @click:saveTask="saveTaskEmit(index, $event)"
+          @click:deleteTask="deleteTaskEmit(index, $event)"
           @drop:task="dropTaskHandler($event, index)"
           @drop="dropHandler($event, index)"
           @dragstart="dragHandler($event, index)"

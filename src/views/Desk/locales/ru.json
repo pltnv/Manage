@@ -25,5 +25,10 @@
   },
   "lists": {
     "title": "Списки"
+  },
+  "tasks": {
+    "actions": {
+      "delete": "Удалить"
+    }
   }
 }

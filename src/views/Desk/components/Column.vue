@@ -23,7 +23,8 @@ const emit = defineEmits([
   "click:saveTask",
   "click:editTask",
   "click:editTitle",
-  "drop:task"
+  "drop:task",
+  "click:deleteTask"
 ]);
 
 let newTask = ref("");
@@ -55,6 +56,21 @@ const saveTaskEmit = () => {
   newTask.value = "";
 };
 
+// Task view
+const openTask = (index) => {
+  showTaskView.value = true;
+  selectedTaskIndex.value = index;
+};
+
+const closeTask = () => {
+  showTaskView.value = false;
+  selectedTaskIndex.value = -1;
+};
+
+const deleteTask = (taskIndex) => {
+  emit("click:deleteTask", taskIndex);
+};
+
 //Desks
 const editTitleEmit = (newTitle) => {
   emit("click:editTitle", [newTitle, props.title]);
@@ -83,16 +99,6 @@ const drop = (e, newIndex) => {
   let oldIndex = e.dataTransfer.getData("oldTaskIndex");
   let task = JSON.parse(e.dataTransfer.getData("task"));
   emit("drop:task", [oldIndex, newIndex, task]);
-};
-
-const openTask = (index) => {
-  showTaskView.value = true;
-  selectedTaskIndex.value = index;
-};
-
-const closeTask = () => {
-  showTaskView.value = false;
-  selectedTaskIndex.value = -1;
 };
 </script>
 
@@ -138,11 +144,11 @@ const closeTask = () => {
 
         <i-modal
           v-if="selectedTaskIndex === index"
+          v-model="showTaskView"
           :title="task.task"
           size="md"
-          v-model="showTaskView"
         >
-          <view-task :task="task" @close="closeTask" />
+          <view-task :task="task" @close="closeTask" @delete="deleteTask(index)" />
         </i-modal>
       </template>
 
