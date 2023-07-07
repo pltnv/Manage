@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Task from "./Task.vue";
-import ViewTask from "./ViewTask.vue";
+import ViewTask from "../ViewTask/ViewTask.vue";
 
 const props = defineProps({
   title: {
@@ -138,8 +138,8 @@ const drop = (e, newIndex) => {
           @dragstart.stop="dragStart($event, task, index)"
           @drop.stop="drop($event, index)"
           @dragend="dragEnd($event)"
-          @click:editTask="editTaskEmitHandler(index, $event)"
-          @click="openTask(index)"
+          @click:editTask.stop="editTaskEmitHandler(index, $event)"
+          @click.stop="openTask(index)"
         />
 
         <i-modal

@@ -11,13 +11,28 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
         {
           title: "To do",
           tasks: [
-            { task: "Learn the poem", date: "18.06.2023, 18:30:19" },
-            { task: "Make a presentation", date: "18.06.2023, 18:36:19" }
+            {
+              task: "Learn the poem",
+              date: "18.06.2023, 18:30:19",
+              comments: [
+                {
+                  user: "LK",
+                  text: "Delete something  fgewhfghwuiegtu43ht ui34htu 34tu34 gh34 ugh43ghth23uithi43hgiu34hgui34hgu i4th4u h34uig  43uihgui43hgui34hguih 4 guh uh hrugiherughu4hui uh urhui3hu4hu34hurhuhuh93u4huerhuirehu34hurhu",
+                  date: "29.06.2023, 18:36:19"
+                },
+                {
+                  user: "AP",
+                  text: "Add to cart ",
+                  date: "30.06.2023, 18:36:19"
+                }
+              ]
+            },
+            { task: "Make a presentation", date: "18.06.2023, 18:36:19", comments: [] }
           ]
         },
         {
           title: "In progress",
-          tasks: [{ task: "Solve the task", date: "18.06.2023, 18:49:19" }]
+          tasks: [{ task: "Solve the task", date: "18.06.2023, 18:49:19", comments: [] }]
         }
       ],
       date: "18.06.2023, 18:05:19",
@@ -28,11 +43,15 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
       desks: [
         {
           title: "To do",
-          tasks: [{ task: "Implement postgress", date: "19.06.2023, 18:10:19" }]
+          tasks: [
+            { task: "Implement postgress", date: "19.06.2023, 18:10:19", comments: [] }
+          ]
         },
         {
           title: "In progress",
-          tasks: [{ task: "Add scss to project", date: "19.06.2023, 18:40:19" }]
+          tasks: [
+            { task: "Add scss to project", date: "19.06.2023, 18:40:19", comments: [] }
+          ]
         }
       ],
       date: "19.06.2023, 18:05:19",
@@ -67,7 +86,8 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   const addDesk = (boardIndex, deskTitle) => {
     const newDesk = {
       title: deskTitle,
-      tasks: []
+      tasks: [],
+      comments: []
     };
     boards.value[boardIndex].push(newDesk);
   };

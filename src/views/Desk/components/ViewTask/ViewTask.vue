@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import Comment from "./Comment.vue";
 
 const props = defineProps({
   task: {
@@ -18,6 +19,12 @@ const deleteTask = () => {
   emit("delete");
   emit("close");
 };
+
+let mockDate = ref({
+  user: "AV",
+  text: "Исправить ошибку 1331 с помощью flex",
+  date: "29.06.2023, 18:36:19"
+});
 </script>
 
 <template>
@@ -28,7 +35,16 @@ const deleteTask = () => {
         <i-button :label="$t('tasks.actions.delete')" block @click="deleteTask" />
       </div>
     </div>
-    <div class="i-dropdown__comments">Comments</div>
+    <div class="i-dropdown__comments">
+      Comments
+      <Comment
+        v-for="(comment, index) in props.task.comments"
+        :key="index"
+        :user="comment.user"
+        :text="comment.text"
+        :date="comment.date"
+      />
+    </div>
   </div>
 </template>
 
@@ -58,8 +74,9 @@ const deleteTask = () => {
 
   &__comments {
     width: 600px;
-    background: red;
+    // background: red;
     min-height: 100px;
+    font-size: 14px;
   }
 }
 </style>
