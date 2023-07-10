@@ -1,5 +1,4 @@
 <script setup>
-import { computed, ref } from "vue";
 import IOverlay from "./IOverlay.vue";
 
 const props = defineProps({
@@ -101,6 +100,22 @@ const cancel = () => {
   border-radius: 18px;
   padding: 10px 20px;
   gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 4px; /* width for vertical scroll */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #7a7478;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #55565a;
+  }
 
   &--dialog {
     width: 500px;

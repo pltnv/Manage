@@ -36,7 +36,6 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: 100%;
   padding: 6px;
   min-height: 40px;
   border-radius: 6px;
@@ -59,7 +58,7 @@ const props = defineProps({
   }
 
   &__text {
-    width: 570px;
+    width: 500px;
     padding: 4px 2px 10px 2px;
     white-space: wrap;
   }

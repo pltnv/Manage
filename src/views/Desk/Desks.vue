@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
-import Column from "./components/Column.vue";
+import Column from "./components/Column/Column.vue";
 import Desk from "./components/Desk.vue";
 import DropDown from "./components/DropDown.vue";
 
