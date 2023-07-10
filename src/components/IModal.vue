@@ -52,35 +52,36 @@ const cancel = () => {
 
         <i class="i-modal__close mdi mdi-close" @click="close" />
       </div>
-
-      <div class="i-modal__default">
-        <slot name="default" />
-      </div>
-
-      <template>
-        <div class="i-modal__footer">
-          <template v-if="$slots.footer">
-            <slot name="footer" />
-          </template>
-
-          <template v-else>
-            <i-button
-              v-if="showAcceptButton"
-              size="md"
-              :disabled="disabledAcceptButton"
-              :label="acceptButtonTitle"
-              @click="accept"
-            />
-            <i-button
-              v-if="showCancelButton"
-              size="md"
-              :disabled="disabledCancelButton"
-              :label="cancelButtonTitle"
-              @click="cancel"
-            />
-          </template>
+      <div class="modal-content">
+        <div class="i-modal__default">
+          <slot name="default" />
         </div>
-      </template>
+
+        <template>
+          <div class="i-modal__footer">
+            <template v-if="$slots.footer">
+              <slot name="footer" />
+            </template>
+
+            <template v-else>
+              <i-button
+                v-if="showAcceptButton"
+                size="md"
+                :disabled="disabledAcceptButton"
+                :label="acceptButtonTitle"
+                @click="accept"
+              />
+              <i-button
+                v-if="showCancelButton"
+                size="md"
+                :disabled="disabledCancelButton"
+                :label="cancelButtonTitle"
+                @click="cancel"
+              />
+            </template>
+          </div>
+        </template>
+      </div>
     </div>
     <i-overlay @click="closeOutside" />
   </div>
@@ -98,23 +99,27 @@ const cancel = () => {
   box-shadow: 0 4px 14px rgba(70, 80, 88, 0.1);
   background-color: white;
   border-radius: 18px;
-  padding: 10px 20px;
+  padding: 10px 14px;
   gap: 10px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 
-  &::-webkit-scrollbar {
-    width: 4px; /* width for vertical scroll */
-  }
+  .modal-content {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-right: 6px;
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #7a7478;
-    border-radius: 9em;
-    box-shadow: inset 1px 1px 10px #f3faf7;
-  }
+    &::-webkit-scrollbar {
+      width: 4px; /* width for vertical scroll */
+    }
 
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #55565a;
+    &::-webkit-scrollbar-thumb {
+      background-color: #7a7478;
+      border-radius: 9em;
+      box-shadow: inset 1px 1px 10px #f3faf7;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #55565a;
+    }
   }
 
   &--dialog {

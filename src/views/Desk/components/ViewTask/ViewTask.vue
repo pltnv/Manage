@@ -22,14 +22,14 @@ const deleteTask = () => {
 </script>
 
 <template>
-  <div class="i-dropdown">
-    <div class="i-dropdown-info">
-      <div class="i-dropdown__main" v-text="task.task" />
-      <div class="i-dropdown__menu">
+  <div class="view-task">
+    <div class="view-task-info">
+      <div class="view-task__main" v-text="task.task" />
+      <div class="view-task__menu">
         <i-button :label="$t('tasks.actions.delete')" block @click="deleteTask" />
       </div>
     </div>
-    <div class="i-dropdown__comments">
+    <div class="view-task__comments">
       <b>Comments</b>
       <Comment
         v-for="(comment, index) in props.task.comments"
@@ -43,13 +43,13 @@ const deleteTask = () => {
 </template>
 
 <style lang="scss">
-.i-dropdown {
+.view-task {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
 
-  .i-dropdown-info {
+  .view-task-info {
     display: flex;
     gap: 10px;
     width: 100%;
@@ -57,20 +57,18 @@ const deleteTask = () => {
   }
 
   &__main {
-    width: 400px;
+    width: 100%;
     background: green;
   }
 
   &__menu {
-    width: 200px;
-    background: blue;
+    width: 160px;
   }
 
   &__comments {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    width: 600px;
     min-height: 100px;
     font-size: 14px;
   }

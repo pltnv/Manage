@@ -25,9 +25,7 @@ const props = defineProps({
       </div>
       <div class="comment__text" v-text="text" />
     </div>
-    <div class="comment__date">
-      {{ date }}
-    </div>
+    <div class="comment__date" v-text="date" />
   </div>
 </template>
 
