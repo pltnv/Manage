@@ -25,6 +25,7 @@ const props = defineProps({
       </div>
       <div class="comment__text" v-text="text" />
     </div>
+
     <div class="comment__date" v-text="date" />
   </div>
 </template>
@@ -37,7 +38,6 @@ const props = defineProps({
   padding: 6px;
   min-height: 40px;
   border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
   .main-wrapper {
     display: flex;

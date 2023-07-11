@@ -145,7 +145,7 @@ const cancel = () => {
   &__title {
     font-size: 20px;
     word-break: break-word;
-    padding-right: 15px;
+    padding-right: 14px;
   }
 
   &__close {
