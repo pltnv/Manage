@@ -3,15 +3,33 @@ import { computed, ref } from "vue";
 
 const props = defineProps({
   id: String | Number,
-  name: String,
+  name: {
+    type: String,
+    default: "Name Surname 3th"
+  },
   src: String,
   size: {
     type: String,
-    default: "md"
-  }
+    default: "md",
+    validator: (value) => {
+      return ["sm", "md"].indexOf(value) !== -1;
+    }
+  },
+  color: String
 });
 
-let inicials = computed(() => "AC");
+let inicials = computed(() => {
+  const nameParts = props.name.split(" ");
+
+  if (nameParts.length === 1) {
+    return nameParts[0].substring(0, 2).toUpperCase();
+  }
+
+  return nameParts
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join("");
+});
 </script>
 
 <template>
@@ -34,11 +52,13 @@ let inicials = computed(() => "AC");
   &--sm {
     width: 20px;
     height: 20px;
+    font-size: 12px;
   }
 
-  &-md {
+  &--md {
     width: 30px;
     height: 30px;
+    font-size: 14px;
   }
 }
 </style>
