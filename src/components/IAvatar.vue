@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 
 const props = defineProps({
-  id: String,
+  id: String | Number,
   name: String,
   src: String,
   size: {
@@ -10,12 +10,14 @@ const props = defineProps({
     default: "md"
   }
 });
+
+let inicials = computed(() => "AC");
 </script>
 
 <template>
-  <div class="i-avatar" :class="[`i-avatar--${size}`]">
+  <div :id="id" class="i-avatar" :class="[`i-avatar--${size}`]">
     <div v-if="src">Src</div>
-    <div v-else>{{ name }}</div>
+    <div v-else v-text="inicials" />
   </div>
 </template>
 
