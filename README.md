@@ -15,7 +15,14 @@
 
 # &#x23F1; Manage app
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue.js-based Kanban board for task management, focusing on native Drag & Drop API integration for seamless task and column reordering. The goal of this project is to explore browser-native DnD functionality without relying on third-party libraries.
+
+## ✨ Features
+- **Pure JavaScript Drag & Drop**
+  - Task reordering within columns
+  - Moving tasks between columns
+  - (Optional) Column dragging
+- LocalStorage persistence
 
 ## Recommended IDE Setup
 
