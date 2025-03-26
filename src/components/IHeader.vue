@@ -1,46 +1,7 @@
-<script setup>
-import { computed, ref } from "vue";
-
-const props = defineProps({
-  id: String
-});
-
-const emit = defineEmits(["click:exit"]);
-
-let isUserVisible = ref(false);
-
-const clickExit = () => {
-  isUserVisible.value = false;
-  emit("click:exit");
-};
-
-const toggleUserInfo = () => {
-  isUserVisible.value = !isUserVisible.value;
-};
-
-const closeUserInfo = () => {
-  isUserVisible.value = false;
-};
-</script>
-
 <template>
-  <header class="i-header" :id="props.id">
+  <header class="i-header">
     <div class="i-header__actions">
       <slot />
-    </div>
-
-    <div class="i-header__user" v-click-outside="closeUserInfo">
-      <i-button
-        variant="icon"
-        size="md"
-        icon-left="mdi-account-circle"
-        class="icon"
-        @click="toggleUserInfo"
-      />
-
-      <div v-if="isUserVisible" class="i-header__user__info">
-        <i-button size="md" block rounded :label="$t('header.exit')" @click="clickExit" />
-      </div>
     </div>
   </header>
 </template>
@@ -51,8 +12,8 @@ const closeUserInfo = () => {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 60px;
-  padding: 0 80px;
+  height: 40px;
+  padding: 0 24px;
   gap: 70px;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.4);
 

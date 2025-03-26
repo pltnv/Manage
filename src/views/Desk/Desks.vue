@@ -5,19 +5,17 @@ import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column/Column.vue";
 import Desk from "./components/Desk.vue";
 import DropDown from "./components/DropDown.vue";
+import DesksWrapper from "@/components/PageWrapper.vue";
 
 const personalTaskStore = usePersonalTaskStore();
 const router = useRouter();
 
 let { boards, addBoard } = personalTaskStore;
 
-let showAddMenu = ref(false);
-let showSearch = ref(false);
-let searchValue = ref("");
-let newBoardName = ref("");
-let sortValue = ref("");
+// Boards
+const searchValue = ref("");
 
-let filteredBoards = computed(() => {
+const filteredBoards = computed(() => {
   if (searchValue.value) {
     return boards.filter((board) => {
       return board.title.toLowerCase().includes(searchValue.value.toLowerCase());
@@ -27,90 +25,139 @@ let filteredBoards = computed(() => {
   return boards;
 });
 
-const openDesk = async (id, boardName) => {
-  await router.push({ name: "Desk", params: { id }, query: { board: boardName } });
-};
+// New desk modal
+const newBoardName = ref("");
+const showAddDeskModal = ref(false);
 
-const addNewDesk = () => {
-  showAddMenu.value = true;
+const closeAddDeskModal = () => {
+  showAddDeskModal.value = true;
 };
-
-const saveNewDesk = (newBoard) => {
-  console.log(newBoard);
+const openAddDeskModal = () => {
+  showAddDeskModal.value = true;
+};
+const createDesk = (newBoard) => {
   if (newBoardName) {
-    showAddMenu.value = false;
+    showAddDeskModal.value = false;
     addBoard(newBoard);
   }
 };
 
-const closeAddMenu = () => {
-  showAddMenu.value = false;
-};
-
-const toggleSearch = () => {
-  showSearch.value = !showSearch.value;
-  searchValue.value = "";
-};
-
-const drag = (e) => {
-  console.log("из desks", e);
+const openDesk = async (id, boardName) => {
+  await router.push({ name: "Desk", params: { id }, query: { board: boardName } });
 };
 </script>
 
 <template>
-  <div class="desks">
+  <DesksWrapper>
     <div class="desks__header">
-      <h1 v-text="$t('boards.title')" />
-      <div class="button-wrapper">
-        <i-button variant="icon" icon-left="mdi-plus" @click="addNewDesk" />
-        <drop-down v-if="showAddMenu" @close="closeAddMenu" @create="saveNewDesk" />
+      <div class="header-left">
+        <h1 v-text="$t('boards.title')" />
+
+        <b-breadcrumb align="is-left" size="is-small">
+          <b-breadcrumb-item tag="router-link" to="/" active>
+            {{ $t("boards.title") }}
+          </b-breadcrumb-item>
+        </b-breadcrumb>
       </div>
-      <i-button variant="icon" icon-left="mdi-magnify" @click="toggleSearch" />
-      <i-input
-        v-if="showSearch"
-        v-model="searchValue"
-        :placeholder="$t('boards.search')"
-        clearable
-        autofocus
-      />
+
+      <div class="header-right">
+        <b-input
+          v-model="searchValue"
+          :placeholder="$t('boards.search')"
+          type="search"
+          icon="magnify"
+          icon-clickable
+          size="is-small"
+        />
+
+        <b-button
+          type="is-primary"
+          size="is-small"
+          icon-left="plus"
+          rounded
+          @click="openAddDeskModal"
+        >
+          {{ $t("boards.actions.create") }}
+        </b-button>
+      </div>
     </div>
 
     <div class="desks__wrapper">
-      <template v-for="(board, index) in filteredBoards" :key="index">
-        <Desk
-          @drag.stop="drag($event)"
-          :title="board.title"
-          :color="board.color"
-          @click="openDesk(index, board.title)"
-        />
-      </template>
+      <div class="boards-container">
+        <template v-for="(board, index) in filteredBoards" :key="index">
+          <Desk
+            @drag.stop="drag($event)"
+            :title="board.title"
+            :color="board.color"
+            @click="openDesk(index, board.title)"
+          />
+        </template>
+      </div>
     </div>
-  </div>
+
+    <b-modal
+      v-model="showAddDeskModal"
+      trap-focus
+      :width="400"
+      :destroy-on-hide="true"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+    >
+      <template #default>
+        <DropDown @close="closeAddDeskModal" @create="createDesk"
+      /></template>
+    </b-modal>
+  </DesksWrapper>
 </template>
 
 <style lang="scss">
-.desks {
+.desks__header {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 10px;
-  height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+  border-bottom: 2px solid #eaeaea;
+  margin-bottom: 8px;
+}
 
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border: 1px solid black;
-    padding: 8px 4px;
-  }
+.desks__wrapper {
+  flex: 1;
+  overflow: hidden;
+  padding: 8px;
 
-  &__wrapper {
-    position: relative;
+  .boards-container {
     display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    align-items: flex-start;
+    gap: 16px;
+    height: auto;
+    overflow-x: auto;
+    padding-bottom: 16px;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
   }
+}
+
+.header-right {
+  display: flex;
+  margin-right: 0 auto;
+  gap: 30px;
 }
 </style>

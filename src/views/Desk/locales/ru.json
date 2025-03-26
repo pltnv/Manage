@@ -2,21 +2,11 @@
   "column": {
     "addTask": "Добавить задачу"
   },
-  "header": {
-    "exit": "Выйти"
-  },
-  "register": {
-    "title": "Регистрация",
-    "signup": "Зарегистрироваться"
-  },
-  "login": {
-    "title": "Войти в Manage app",
-    "login": "Войти"
-  },
   "boards": {
     "title": "Доски",
     "enterTitle": "Введите название",
     "boardTitle": "Название",
+    "chooseColor": "Выберите цвет",
     "actions": {
       "create": "Создать доску",
       "save": "Сохранить"

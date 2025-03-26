@@ -27,12 +27,13 @@ const emit = defineEmits([
   "click:deleteTask"
 ]);
 
-let newTask = ref("");
-let isEditTitle = ref(false);
-let showTaskView = ref(false);
-let selectedTaskIndex = ref(-1);
+const newTask = ref("");
+const isEditTitle = ref(false);
+const showTaskView = ref(false);
+const selectedTaskIndex = ref(-1);
 
-let showAddContent = ref(false);
+const showAddContent = ref(false);
+
 const addTask = () => {
   showAddContent.value = !showAddContent.value;
 };
@@ -96,8 +97,8 @@ const dragEnd = (e) => {
 };
 
 const drop = (e, newIndex) => {
-  let oldIndex = e.dataTransfer.getData("oldTaskIndex");
-  let task = JSON.parse(e.dataTransfer.getData("task"));
+  const oldIndex = e.dataTransfer.getData("oldTaskIndex");
+  const task = JSON.parse(e.dataTransfer.getData("task"));
   emit("drop:task", [oldIndex, newIndex, task]);
 };
 </script>

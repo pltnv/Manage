@@ -10,7 +10,7 @@ const props = defineProps({
 
 const emit = defineEmits(["click:editTask"]);
 
-let isEdit = ref(false);
+const isEdit = ref(false);
 
 const openAddTask = () => {
   isEdit.value = true;

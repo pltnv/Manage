@@ -4,7 +4,7 @@ import { useLocalStorage } from "@/composable/useLocalStorage";
 
 export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   // Using initial mock data to fill the app due to the lack of a backend ;)
-  let boards = ref([
+  const boards = ref([
     {
       title: "University",
       desks: [

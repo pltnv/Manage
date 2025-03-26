@@ -1,5 +1,7 @@
 import "@mdi/font/css/materialdesignicons.css";
 import i18n from "./plugins/i18n/i18n";
+import { Breadcrumb, Button, Input, Modal } from "buefy";
+import "buefy/dist/buefy.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
@@ -24,4 +26,8 @@ app.component("i-button", IButton);
 app.component("i-input", IInput);
 app.component("i-modal", IModal);
 app.use(clickOutside);
+app.use(Button);
+app.use(Breadcrumb);
+app.use(Input);
+app.use(Modal);
 app.mount("#app");

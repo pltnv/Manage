@@ -16,6 +16,7 @@
   "boards": {
     "title": "Boards",
     "enterTitle": "Enter a title",
+    "chooseColor": "Choose color",
     "boardTitle": "Title",
     "actions": {
       "create": "Create board",

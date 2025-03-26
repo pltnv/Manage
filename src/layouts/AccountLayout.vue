@@ -1,34 +1,21 @@
 <script setup>
 import IHeader from "../components/IHeader.vue";
-import { useAuthStore } from "../stores/authStore";
+
 import { useI18nStore } from "../stores/i18nStore";
 
-const authStore = useAuthStore();
 const i18n = useI18nStore();
 
 const { toggleLocale } = i18n;
-
-const logout = async () => {
-  await authStore.logout();
-};
 </script>
 
 <template>
   <div class="account-layout">
-    <i-header @click:exit="logout">
-      <i-button
-        variant="icon"
-        size="md"
-        class="icon"
-        icon-left="mdi-web"
-        @click="toggleLocale"
-      />
-      <i-button variant="icon" size="md" icon-left="mdi-brightness-6" class="icon" />
+    <i-header>
+      <b-button icon-right="translate" rounded size="is-small" @click="toggleLocale" />
+      <b-button icon-right="brightness-6" rounded size="is-small" />
     </i-header>
 
     <div class="content-wrapper">
-      <aside class="menu">Menu</aside>
-
       <main>
         <router-view />
       </main>
@@ -48,7 +35,6 @@ const logout = async () => {
 }
 
 main {
-  height: calc(100vh - 200px);
   width: 100%;
 }
 </style>
