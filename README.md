@@ -8,9 +8,6 @@
   <a href="  https://github.com/vitejs/vite">
     <img src="https://img.shields.io/badge/vite-4.3.5-brightgreen.svg" alt="vite">
   </a>
-  <a href="https://github.com/vuelidate/vuelidate#readme">
-    <img src="https://img.shields.io/badge/vuelidate-2.0.2-brightgreen.svg" alt="vuelidate">
-  </a>
  </p>
 
 # &#x23F1; Manage app
