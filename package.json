@@ -10,8 +10,6 @@
     "format": "prettier --write \"src/**/*.{js,jsx,vue}\""
   },
   "dependencies": {
-    "@vuelidate/core": "^2.0.2",
-    "@vuelidate/validators": "^2.0.2",
     "buefy": "npm:@ntohq/buefy-next@^0.2.0",
     "pinia": "^2.0.36",
     "vue": "^3.3.2",

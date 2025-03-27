@@ -1,22 +1,14 @@
 <script setup>
-import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column/Column.vue";
 import Desk from "./components/Desk.vue";
 import DesksWrapper from "@/components/PageWrapper.vue";
+import { useBoards } from "../../composable/useBoards";
 
 const route = useRoute();
 const personalTaskStore = usePersonalTaskStore();
-
-const { board } = route.query;
-let { boards } = personalTaskStore;
-
-const currentBoardIndex = computed(() => route.params.id);
-
-const boardName = computed(() => {
-  return route.query?.board;
-});
+const { currentBoardIndex, boardName, boards } = useBoards();
 
 const clickDotsEmit = (boardIndex) => {
   console.log(boardIndex);
@@ -55,13 +47,11 @@ const dropTaskHandler = (e, deskIndex) => {
 
 const dropHandler = (e, deskIndex) => {
   try {
-    const task = JSON.parse(e.dataTransfer.getData("task"));
-    const oldIndex = e.dataTransfer.getData("oldTaskIndex");
-
-    personalTaskStore.moveTask(currentBoardIndex.value, deskIndex, oldIndex, task);
-  } catch (e) {
     const deskOldIndex = e.dataTransfer.getData("deskOldIndex");
     personalTaskStore.moveDesk(currentBoardIndex.value, deskIndex, deskOldIndex);
+  } catch (e) {
+    // todo
+    console.warn(e);
   }
 };
 
@@ -72,25 +62,25 @@ const dragHandler = (e, deskIndex) => {
 
 <template>
   <DesksWrapper>
-    <div class="desks__header">
+    <div :class="$style.desksHeader">
       <div>
-        <h1 v-text="board" />
+        <h1 v-text="boardName" />
         <b-breadcrumb align="is-left" size="is-small">
           <b-breadcrumb-item tag="router-link" to="/desks">
             {{ $t("boards.title") }}
           </b-breadcrumb-item>
           <b-breadcrumb-item tag="router-link" to="/" active>
-            {{ board }}
+            {{ boardName }}
           </b-breadcrumb-item>
         </b-breadcrumb>
       </div>
     </div>
 
-    <div class="desk-view__main">
+    <div :class="$style.deskViewMain">
       <div
         v-for="(desk, index) in boards[currentBoardIndex].desks"
         :key="index"
-        class="desk-view__desks"
+        :class="$style.desks"
       >
         <Column
           :title="desk.title"
@@ -109,15 +99,17 @@ const dragHandler = (e, deskIndex) => {
   </DesksWrapper>
 </template>
 
-<style lang="scss">
-.desk-view__main {
+<style lang="scss" module>
+.desksHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.deskViewMain {
   display: flex;
   gap: 10px;
 }
 
-.desks__header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.desks {
 }
 </style>

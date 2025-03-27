@@ -30,7 +30,7 @@ const newBoardName = ref("");
 const showAddDeskModal = ref(false);
 
 const closeAddDeskModal = () => {
-  showAddDeskModal.value = true;
+  showAddDeskModal.value = false;
 };
 const openAddDeskModal = () => {
   showAddDeskModal.value = true;
@@ -49,8 +49,8 @@ const openDesk = async (id, boardName) => {
 
 <template>
   <DesksWrapper>
-    <div class="desks__header">
-      <div class="header-left">
+    <div :class="$style.desksHeader">
+      <div :class="$style.headerLeft">
         <h1 v-text="$t('boards.title')" />
 
         <b-breadcrumb align="is-left" size="is-small">
@@ -60,7 +60,7 @@ const openDesk = async (id, boardName) => {
         </b-breadcrumb>
       </div>
 
-      <div class="header-right">
+      <div :class="$style.headerRight">
         <b-input
           v-model="searchValue"
           :placeholder="$t('boards.search')"
@@ -82,8 +82,8 @@ const openDesk = async (id, boardName) => {
       </div>
     </div>
 
-    <div class="desks__wrapper">
-      <div class="boards-container">
+    <div :class="$style.desksWrapper">
+      <div :class="$style.boardsContainer">
         <template v-for="(board, index) in filteredBoards" :key="index">
           <Desk
             @drag.stop="drag($event)"
@@ -111,8 +111,8 @@ const openDesk = async (id, boardName) => {
   </DesksWrapper>
 </template>
 
-<style lang="scss">
-.desks__header {
+<style lang="scss" module>
+.desksHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -120,42 +120,45 @@ const openDesk = async (id, boardName) => {
   flex-shrink: 0;
   border-bottom: 2px solid #eaeaea;
   margin-bottom: 8px;
+  padding: 0 12px;
 }
 
-.desks__wrapper {
+.desksWrapper {
   flex: 1;
-  overflow: hidden;
-  padding: 8px;
+  overflow: auto;
+  padding: 12px;
+  height: calc(100vh - 150px);
+}
 
-  .boards-container {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    height: auto;
-    overflow-x: auto;
-    padding-bottom: 16px;
+.boardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 160px);
+  gap: 26px;
+  width: 100%;
+  align-content: start;
+  min-height: min-content;
 
-    &::-webkit-scrollbar {
-      height: 8px;
-    }
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 4px;
-    }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-      background: #c1c1c1;
-      border-radius: 4px;
-    }
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
 
-    &::-webkit-scrollbar-thumb:hover {
-      background: #a8a8a8;
-    }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
   }
 }
 
-.header-right {
+.headerRight {
   display: flex;
   margin-right: 0 auto;
   gap: 30px;
