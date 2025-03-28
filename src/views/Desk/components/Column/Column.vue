@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import Task from "./Task.vue";
 import ViewTask from "../ViewTask/ViewTask.vue";
+import { useTaskView } from "../../../../composable/useTaskView";
+import { useTaskManagement } from "../../../../composable/useTaskManagement";
 
 const props = defineProps({
   title: {
@@ -29,23 +31,21 @@ const emit = defineEmits([
   "click:deleteTask"
 ]);
 
-const newTask = ref("");
+const { newTask, showAddContent, addTask, closeAddContent, saveTask } =
+  useTaskManagement(emit);
+const { showTaskView, selectedTaskIndex, openTask, closeTask } = useTaskView();
+
+// Title
 const isEditTitle = ref(false);
-const showTaskView = ref(false);
-const selectedTaskIndex = ref(-1);
-const showAddContent = ref(false);
 
-const addTask = () => {
-  showAddContent.value = true;
+const clickTitle = () => {
+  isEditTitle.value = true;
 };
 
-const closeAddContent = () => {
-  showAddContent.value = false;
-  newTask.value = "";
-};
-
-const clickDotsEmit = () => {
-  emit("click:dots");
+const handleTitleBlur = () => {
+  if (isEditTitle.value) {
+    editTitleEmit(props.title);
+  }
 };
 
 // Tasks
@@ -61,17 +61,7 @@ const saveTaskEmit = () => {
   }
 };
 
-// Task view
-const openTask = (index) => {
-  showTaskView.value = true;
-  selectedTaskIndex.value = index;
-};
-
-const closeTask = () => {
-  showTaskView.value = false;
-  selectedTaskIndex.value = -1;
-};
-
+// Task
 const deleteTask = (taskIndex) => {
   emit("click:deleteTask", taskIndex);
 };
@@ -81,16 +71,6 @@ const editTitleEmit = (newTitle) => {
   if (newTitle.trim()) {
     emit("update:title", newTitle.trim());
     isEditTitle.value = false;
-  }
-};
-
-const clickTitle = () => {
-  isEditTitle.value = true;
-};
-
-const handleTitleBlur = () => {
-  if (isEditTitle.value) {
-    editTitleEmit(props.title);
   }
 };
 
@@ -108,6 +88,10 @@ const drop = (e, newIndex) => {
   const oldIndex = e.dataTransfer.getData("oldTaskIndex");
   const task = JSON.parse(e.dataTransfer.getData("task"));
   emit("drop:task", [oldIndex, newIndex, task]);
+};
+
+const clickDotsEmit = () => {
+  emit("click:dots");
 };
 </script>
 

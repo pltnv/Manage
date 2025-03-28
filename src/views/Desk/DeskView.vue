@@ -5,59 +5,23 @@ import Column from "./components/Column/Column.vue";
 import Desk from "./components/Desk.vue";
 import DesksWrapper from "@/components/PageWrapper.vue";
 import { useBoards } from "../../composable/useBoards";
+import { useBoardHandlers } from "../../composable/useBoardHandlers";
 
 const route = useRoute();
 const personalTaskStore = usePersonalTaskStore();
+
 const { currentBoardIndex, boardName, boards } = useBoards();
 
-const clickDotsEmit = (boardIndex) => {
-  console.log(boardIndex);
-};
-
-const clickEditEmit = (deskIndex, newTask) => {
-  const [taskIndex, newTaskText] = newTask;
-  personalTaskStore.editTask(currentBoardIndex.value, deskIndex, taskIndex, newTaskText);
-};
-
-const saveTaskEmit = (deskIndex, newTaskText) => {
-  if (newTaskText) {
-    personalTaskStore.addTask(currentBoardIndex.value, deskIndex, newTaskText);
-  }
-};
-
-const editTitleEmit = (newTitle) => {
-  const [newTitleText, oldTitle] = newTitle;
-  personalTaskStore.renameDesk(currentBoardIndex.value, oldTitle, newTitleText);
-};
-
-const deleteTaskEmit = (deskIndex, taskIndex) => {
-  personalTaskStore.removeTask(currentBoardIndex.value, deskIndex, taskIndex);
-};
-
-const dropTaskHandler = (e, deskIndex) => {
-  const [oldIndex, newIndex, task] = e;
-  personalTaskStore.moveTask(
-    currentBoardIndex.value,
-    deskIndex,
-    oldIndex,
-    task,
-    newIndex
-  );
-};
-
-const dropHandler = (e, deskIndex) => {
-  try {
-    const deskOldIndex = e.dataTransfer.getData("deskOldIndex");
-    personalTaskStore.moveDesk(currentBoardIndex.value, deskIndex, deskOldIndex);
-  } catch (e) {
-    // todo
-    console.warn(e);
-  }
-};
-
-const dragHandler = (e, deskIndex) => {
-  e.dataTransfer.setData("deskOldIndex", deskIndex);
-};
+const {
+  clickDotsEmit,
+  clickEditEmit,
+  saveTaskEmit,
+  editTitleEmit,
+  deleteTaskEmit,
+  dropTaskHandler,
+  dropHandler,
+  dragHandler
+} = useBoardHandlers(personalTaskStore, currentBoardIndex);
 </script>
 
 <template>
@@ -69,6 +33,7 @@ const dragHandler = (e, deskIndex) => {
           <b-breadcrumb-item tag="router-link" to="/desks">
             {{ $t("boards.title") }}
           </b-breadcrumb-item>
+          
           <b-breadcrumb-item tag="router-link" to="/" active>
             {{ boardName }}
           </b-breadcrumb-item>
