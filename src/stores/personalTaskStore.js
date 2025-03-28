@@ -88,7 +88,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
       tasks: [],
       comments: []
     };
-    boards.value[boardIndex].push(newDesk);
+    boards.value[boardIndex].desks.push(newDesk);
   };
 
   const removeDesk = (boardIndex, deskIndex) => {
