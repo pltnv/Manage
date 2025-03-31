@@ -3,7 +3,6 @@ import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 import Column from "./components/Column.vue";
-import Desk from "./components/Desk.vue";
 import AddColumn from "./components/AddColumn.vue";
 import DesksWrapper from "@/components/PageWrapper.vue";
 import { useBoards } from "./composables/useBoards";

@@ -1,6 +1,6 @@
 import "@mdi/font/css/materialdesignicons.css";
 import i18n from "./plugins/i18n/i18n";
-import { Breadcrumb, Button, Input, Modal, Dropdown } from "buefy";
+import { Breadcrumb, Button, Input, Modal, Dropdown, Tooltip } from "buefy";
 import "buefy/dist/buefy.css";
 
 import { createApp } from "vue";
@@ -23,4 +23,5 @@ app.use(Breadcrumb);
 app.use(Dropdown);
 app.use(Input);
 app.use(Modal);
+app.use(Tooltip);
 app.mount("#app");

@@ -43,11 +43,11 @@ const handleContextMenu = (e) => {
       color: textColor,
       border: isActive ? `2px solid ${textColor}` : 'none'
     }"
-    @click="handleClick"
-    @contextmenu="handleContextMenu"
     :title="title"
     tabindex="0"
+    @contextmenu="handleContextMenu"
     @keydown.enter="handleClick"
+    @click="handleClick"
   >
     <span class="desk-title">{{ title }}</span>
     <span v-if="taskCount > 0" class="task-counter">

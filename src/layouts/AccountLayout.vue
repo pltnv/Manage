@@ -9,7 +9,14 @@ const { toggleLocale } = i18n;
 <template>
   <div>
     <i-header>
-      <b-button icon-right="translate" rounded size="is-small" @click="toggleLocale" />
+      <b-tooltip
+        label="Переключить язык"
+        type="is-dark"
+        position="is-left"
+        size="is-small"
+      >
+        <b-button icon-right="translate" rounded size="is-small" @click="toggleLocale" />
+      </b-tooltip>
     </i-header>
 
     <main :class="$style.contentWrapper">
