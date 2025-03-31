@@ -2,7 +2,6 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
-import Column from "./components/Column/Column.vue";
 import Desk from "./components/Desk.vue";
 import DropDown from "./components/DropDown.vue";
 import DesksWrapper from "@/components/PageWrapper.vue";
@@ -43,7 +42,7 @@ const createDesk = (newBoard) => {
 };
 
 const openDesk = async (id, boardName) => {
-  await router.push({ name: "Desk", params: { id }, query: { board: boardName } });
+  await router.push({ name: "Board", params: { id }, query: { board: boardName } });
 };
 </script>
 
@@ -120,7 +119,6 @@ const openDesk = async (id, boardName) => {
   flex-shrink: 0;
   border-bottom: 2px solid #eaeaea;
   margin-bottom: 8px;
-  padding: 0 12px;
 }
 
 .desksWrapper {

@@ -17,7 +17,7 @@ defineProps({
 .desks {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 4px;
   padding: 24px;
   height: 100%;
   background-color: #f8f9fa;

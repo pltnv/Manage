@@ -1,8 +1,4 @@
 export function useBoardHandlers(personalTaskStore, currentBoardIndex) {
-  const clickDotsEmit = (boardIndex) => {
-    console.log(boardIndex);
-  };
-
   const clickEditEmit = (deskIndex, newTask) => {
     const [taskIndex, newTaskText] = newTask;
     personalTaskStore.editTask({
@@ -68,14 +64,22 @@ export function useBoardHandlers(personalTaskStore, currentBoardIndex) {
     e.dataTransfer.setData("deskOldIndex", deskIndex);
   };
 
+  const deleteColumn = (columnIndex) => {
+    console.log("333");
+    personalTaskStore.removeDesk({
+      boardIndex: currentBoardIndex.value,
+      deskIndex: columnIndex
+    });
+  };
+
   return {
-    clickDotsEmit,
     clickEditEmit,
     saveTaskEmit,
     editTitleEmit,
     deleteTaskEmit,
     dropTaskHandler,
     dropHandler,
-    dragHandler
+    dragHandler,
+    deleteColumn
   };
 }

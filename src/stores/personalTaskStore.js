@@ -81,7 +81,6 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   // Desks
-
   const addDesk = (boardIndex, deskTitle) => {
     const newDesk = {
       title: deskTitle,
@@ -91,7 +90,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     boards.value[boardIndex].desks.push(newDesk);
   };
 
-  const removeDesk = (boardIndex, deskIndex) => {
+  const removeDesk = ({ boardIndex, deskIndex }) => {
     const index = boards.value[boardIndex].desks.findIndex((_, i) => i === deskIndex);
 
     if (index !== -1) {

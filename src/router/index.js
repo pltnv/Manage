@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import DesksRoutes from "@/views/Desk/router/routes";
+import BoardsRoutes from "@/views/Boards/router/routes";
+import BoardRoutes from "@/views/Board/router/routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,7 +16,8 @@ const router = createRouter({
     //     }
     //   ]
     // },
-    ...DesksRoutes
+    ...BoardsRoutes,
+    ...BoardRoutes
   ]
 });
 

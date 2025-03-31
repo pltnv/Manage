@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import Task from "./Task.vue";
-import ViewTask from "../ViewTask/ViewTask.vue";
-import { useTaskView } from "../../../../composable/useTaskView";
-import { useTaskManagement } from "../../../../composable/useTaskManagement";
+import { useTaskView } from "../composables/useTaskView";
+import { useTaskManagement } from "../composables/useTaskManagment";
 
 const props = defineProps({
   title: {
@@ -24,11 +23,11 @@ const props = defineProps({
 
 const emit = defineEmits([
   "update:title",
-  "click:dots",
   "click:saveTask",
   "click:editTask",
   "drop:task",
-  "click:deleteTask"
+  "click:deleteTask",
+  "click:deleteColumn"
 ]);
 
 const { newTask, showAddContent, addTask, closeAddContent, saveTask } =
@@ -90,8 +89,8 @@ const drop = (e, newIndex) => {
   emit("drop:task", [oldIndex, newIndex, task]);
 };
 
-const clickDotsEmit = () => {
-  emit("click:dots");
+const handleDeleteColumnClick = () => {
+  emit("click:deleteColumn");
 };
 </script>
 
@@ -122,13 +121,21 @@ const clickDotsEmit = () => {
           @keyup.enter="editTitleEmit(title)"
         />
 
-        <b-dropdown position="is-bottom-left" aria-role="menu" class="desk-column__menu">
+        <b-dropdown position="is-bottom-left" :mobileModal="false">
           <template #trigger>
             <b-button size="is-small" icon-right="dots-vertical" type="is-text" />
           </template>
 
-          <b-dropdown-item aria-role="menuitem" @click="clickDotsEmit">
-            <span>Действия</span>
+          <b-dropdown-item aria-role="listitem">
+            <b-button
+              type="is-text"
+              size="is-small"
+              icon-left="delete"
+              expanded
+              @click="handleDeleteColumnClick"
+            >
+              Удалить
+            </b-button>
           </b-dropdown-item>
         </b-dropdown>
       </div>
@@ -147,22 +154,6 @@ const clickDotsEmit = () => {
           @click.stop="openTask(index)"
         />
       </template>
-
-      <b-modal
-        v-model="showTaskView"
-        :title="tasks[selectedTaskIndex]?.task || ''"
-        has-modal-card
-        trap-focus
-        aria-role="dialog"
-        aria-modal
-      >
-        <ViewTask
-          v-if="selectedTaskIndex !== -1"
-          :task="tasks[selectedTaskIndex]"
-          @close="closeTask"
-          @delete="deleteTask(selectedTaskIndex)"
-        />
-      </b-modal>
     </div>
 
     <div v-if="!showAddContent" class="desk-column__footer">

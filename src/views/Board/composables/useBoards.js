@@ -5,7 +5,7 @@ import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 export function useBoards() {
   const route = useRoute();
   const personalTaskStore = usePersonalTaskStore();
-  
+
   // add storeToRefs thing
   const { boards } = personalTaskStore;
 

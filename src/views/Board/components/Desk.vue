@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { getContrastTextColor } from "./../../../utills/getContrastTextColor";
+import { getContrastTextColor } from "@/utills/getContrastTextColor";
 
 const props = defineProps({
   title: {
