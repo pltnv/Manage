@@ -9,9 +9,4 @@ const notificationStore = useNotificationStore();
   <RouterView />
 </template>
 
-<style lang="scss" scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -8,14 +8,18 @@
   <a href="  https://github.com/vitejs/vite">
     <img src="https://img.shields.io/badge/vite-4.3.5-brightgreen.svg" alt="vite">
   </a>
-  <a href="https://github.com/vuelidate/vuelidate#readme">
-    <img src="https://img.shields.io/badge/vuelidate-2.0.2-brightgreen.svg" alt="vuelidate">
-  </a>
  </p>
 
 # &#x23F1; Manage app
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue.js-based Kanban board for task management, focusing on native Drag & Drop API integration for seamless task and column reordering. The goal of this project is to explore browser-native DnD functionality without relying on third-party libraries.
+
+## ✨ Features
+- **Pure JavaScript Drag & Drop**
+  - Task reordering within columns
+  - Moving tasks between columns
+  - (Optional) Column dragging
+- LocalStorage persistence
 
 ## Recommended IDE Setup
 

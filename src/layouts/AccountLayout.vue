@@ -1,54 +1,34 @@
 <script setup>
 import IHeader from "../components/IHeader.vue";
-import { useAuthStore } from "../stores/authStore";
 import { useI18nStore } from "../stores/i18nStore";
 
-const authStore = useAuthStore();
 const i18n = useI18nStore();
-
 const { toggleLocale } = i18n;
-
-const logout = async () => {
-  await authStore.logout();
-};
 </script>
 
 <template>
-  <div class="account-layout">
-    <i-header @click:exit="logout">
-      <i-button
-        variant="icon"
-        size="md"
-        class="icon"
-        icon-left="mdi-web"
-        @click="toggleLocale"
-      />
-      <i-button variant="icon" size="md" icon-left="mdi-brightness-6" class="icon" />
+  <div>
+    <i-header>
+      <b-tooltip
+        label="Переключить язык"
+        type="is-dark"
+        position="is-left"
+        size="is-small"
+      >
+        <b-button icon-right="translate" rounded size="is-small" @click="toggleLocale" />
+      </b-tooltip>
     </i-header>
 
-    <div class="content-wrapper">
-      <aside class="menu">Menu</aside>
-
-      <main>
-        <router-view />
-      </main>
-    </div>
+    <main :class="$style.contentWrapper">
+      <router-view />
+    </main>
   </div>
 </template>
 
-<style lang="scss">
-.content-wrapper {
-  display: flex;
-  gap: 4px;
+<style lang="scss" module>
+.contentWrapper {
   padding: 20px 16px;
   height: calc(100vh - 60px);
-}
-.menu {
-  min-width: 20%;
-}
-
-main {
-  height: calc(100vh - 200px);
   width: 100%;
 }
 </style>

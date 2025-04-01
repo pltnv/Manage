@@ -4,7 +4,7 @@ import { useLocalStorage } from "@/composable/useLocalStorage";
 
 export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   // Using initial mock data to fill the app due to the lack of a backend ;)
-  let boards = ref([
+  const boards = ref([
     {
       title: "University",
       desks: [
@@ -60,7 +60,6 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   ]);
 
   // Boards
-
   const addBoard = (newBoard) => {
     boards.value.push({ ...newBoard, desks: [], date: new Date().toLocaleString() });
   };
@@ -82,17 +81,16 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   // Desks
-
   const addDesk = (boardIndex, deskTitle) => {
     const newDesk = {
       title: deskTitle,
       tasks: [],
       comments: []
     };
-    boards.value[boardIndex].push(newDesk);
+    boards.value[boardIndex].desks.push(newDesk);
   };
 
-  const removeDesk = (boardIndex, deskIndex) => {
+  const removeDesk = ({ boardIndex, deskIndex }) => {
     const index = boards.value[boardIndex].desks.findIndex((_, i) => i === deskIndex);
 
     if (index !== -1) {
@@ -100,7 +98,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     }
   };
 
-  const renameDesk = (boardIndex, oldTitle, newTitle) => {
+  const renameDesk = ({ boardIndex, oldTitle, newTitle }) => {
     const index = boards.value[boardIndex].desks.findIndex(
       (desk) => desk.title === oldTitle
     );
@@ -111,15 +109,14 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   // Tasks
-
-  const addTask = (boardIndex, deskIndex, taskText) => {
+  const addTask = ({ boardIndex, deskIndex, taskText }) => {
     boards.value[boardIndex].desks[deskIndex].tasks.push({
       task: taskText,
       date: new Date().toLocaleString()
     });
   };
 
-  const removeTask = (boardId, deskIndex, taskIndex) => {
+  const removeTask = ({ boardId, deskIndex, taskIndex }) => {
     const index = boards.value[boardId].desks[deskIndex].tasks.findIndex(
       (_, idx) => idx === taskIndex
     );
@@ -129,12 +126,12 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
     }
   };
 
-  const editTask = (boardIndex, deskIndex, taskIndex, newText) => {
+  const editTask = ({ boardIndex, deskIndex, taskIndex, newText }) => {
     boards.value[boardIndex].desks[deskIndex].tasks[taskIndex].task = newText;
   };
 
   // Drag&drop for tasks
-  const moveTask = (boardIndex, newDeskIndex, oldTaskIndex, task, newTaskIndex) => {
+  const moveTask = ({ boardIndex, newDeskIndex, oldTaskIndex, task, newTaskIndex }) => {
     const oldDeskIndex = boards.value[boardIndex].desks.findIndex((desk) =>
       desk.tasks.some((t) => t.text === task.text && t.date === task.date)
     );
@@ -158,7 +155,7 @@ export const usePersonalTaskStore = defineStore("personalTaskStore", () => {
   };
 
   // Drag&drop for desks
-  const moveDesk = (boardIndex, newDeskIndex, oldDeskIndex) => {
+  const moveDesk = ({ boardIndex, newDeskIndex, oldDeskIndex }) => {
     const desk = boards.value[boardIndex].desks[oldDeskIndex];
 
     boards.value[boardIndex].desks.splice(oldDeskIndex, 1);

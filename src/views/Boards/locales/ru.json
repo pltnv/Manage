@@ -1,0 +1,24 @@
+{
+  "column": {
+    "addTask": "Добавить задачу"
+  },
+  "boards": {
+    "title": "Доски",
+    "enterTitle": "Введите название",
+    "boardTitle": "Название",
+    "chooseColor": "Выберите цвет",
+    "actions": {
+      "create": "Создать доску",
+      "save": "Сохранить"
+    },
+    "search": "Поиск..."
+  },
+  "lists": {
+    "title": "Списки"
+  },
+  "tasks": {
+    "actions": {
+      "delete": "Удалить"
+    }
+  }
+}
