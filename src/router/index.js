@@ -5,6 +5,7 @@ import BoardRoutes from "@/views/Board/router/routes";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // todo:
     // {
     //   path: "/",
     //   component: () => import("@/layouts/AccountLayout.vue"),

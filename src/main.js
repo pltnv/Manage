@@ -1,11 +1,12 @@
-import "@mdi/font/css/materialdesignicons.css";
 import i18n from "@/locales/index";
+
 import { Breadcrumb, Button, Input, Modal, Dropdown, Tooltip } from "buefy";
 import "buefy/dist/buefy.css";
 
+import "@mdi/font/css/materialdesignicons.css";
+
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-
 import App from "./App.vue";
 import router from "./router";
 
