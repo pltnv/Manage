@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import Task from "./Task.vue";
-import { useTaskView } from "../composables/useTaskView";
 import { useTaskManagement } from "../composables/useTaskManagment";
 
 const props = defineProps({
@@ -32,7 +31,6 @@ const emit = defineEmits([
 
 const { newTask, showAddContent, addTask, closeAddContent, saveTask } =
   useTaskManagement(emit);
-const { showTaskView, selectedTaskIndex, openTask, closeTask } = useTaskView();
 
 // Title
 const isEditTitle = ref(false);
@@ -150,8 +148,7 @@ const handleDeleteColumnClick = () => {
           @dragstart.stop="dragStart($event, task, index)"
           @drop.stop="drop($event, index)"
           @dragend="dragEnd($event)"
-          @click:editTask.stop="editTaskEmitHandler(index, $event)"
-          @click.stop="openTask(index)"
+          @click:editTask="editTaskEmitHandler(index, $event)"
         />
       </template>
     </div>

@@ -65,7 +65,6 @@ export function useBoardHandlers(personalTaskStore, currentBoardIndex) {
   };
 
   const deleteColumn = (columnIndex) => {
-    console.log("333");
     personalTaskStore.removeDesk({
       boardIndex: currentBoardIndex.value,
       deskIndex: columnIndex

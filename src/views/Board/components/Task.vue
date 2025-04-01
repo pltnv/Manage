@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   task: {
@@ -10,77 +10,122 @@ const props = defineProps({
 
 const emit = defineEmits(["click:editTask"]);
 
-const isEdit = ref(false);
+const isEditing = ref(false);
+const editedTaskText = ref(props.task);
 
-const openAddTask = () => {
-  isEdit.value = true;
+const startEditing = () => {
+  editedTaskText.value = props.task;
+  isEditing.value = true;
 };
 
-const saveTask = (newText) => {
-  emit("click:editTask", newText);
+const saveTask = () => {
+  if (editedTaskText.value && editedTaskText.value !== props.task) {
+    emit("click:editTask", editedTaskText.value.trim());
+  }
+  isEditing.value = false;
 };
 
-const closeEditing = () => {
-  isEdit.value = false;
+const cancelEditing = () => {
+  isEditing.value = false;
 };
 </script>
 
 <template>
-  <div class="task" :draggable="true" @dragenter.prevent @dragover.prevent>
-    <template v-if="!isEdit">
-      <div v-text="task" class="task__content" />
-      <div class="task__edit">
-        <i-button variant="icon" class="mdi mdi-pencil" @click="openAddTask" />
-      </div>
-    </template>
+  <div class="task-card" :draggable="true" @dragenter.prevent @dragover.prevent>
+    <div v-if="!isEditing" class="task-content">
+      <p class="task-text" v-text="task" />
+      <b-button
+        type="is-text"
+        size="is-small"
+        icon-right="pencil"
+        class="edit-button"
+        @click="startEditing"
+      />
+    </div>
 
-    <template v-else>
-      <i-input
-        :modelValue="task"
-        @update:modelValue="saveTask($event)"
-        @blur="closeEditing"
+    <div v-else class="task-edit">
+      <b-input
+        v-model="editedTaskText"
+        type="textarea"
+        size="is-small"
+        rows="2"
+        autofocus
+        @keyup.enter="saveTask"
+        @keyup.esc="cancelEditing"
       />
-      <i-button
-        variant="icon"
-        class="mdi mdi-content-save-outline"
-        @click="closeEditing"
-      />
-    </template>
+      <div class="edit-actions">
+        <b-button
+          type="is-primary"
+          size="is-small"
+          icon-right="content-save"
+          @click="saveTask"
+        />
+        <b-button
+          type="is-text"
+          size="is-small"
+          icon-right="close"
+          @click="cancelEditing"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss">
-.task {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  width: 250px;
-  border-radius: 10px;
-  min-height: 20px;
-  padding: 10px;
+<style lang="scss" scoped>
+.task-card {
+  position: relative;
+  width: 100%;
+  min-height: 60px;
+  padding: 12px;
+  margin-bottom: 8px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: grab;
 
   &:hover {
-    cursor: pointer;
-    opacity: 0.7;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
 
-    .task__edit {
-      visibility: visible;
+    .edit-button {
+      opacity: 1;
     }
   }
 
-  .task__edit {
-    cursor: pointer;
+  &:active {
+    cursor: grabbing;
   }
+}
 
-  &__content {
-    padding-right: 4px;
-  }
+.task-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
 
-  &__edit {
-    visibility: hidden;
-    margin-left: auto;
-  }
+.task-text {
+  flex-grow: 1;
+  margin: 0;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.edit-button {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: auto;
+}
+
+.task-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
 }
 </style>
