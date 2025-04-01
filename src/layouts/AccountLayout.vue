@@ -1,5 +1,5 @@
 <script setup>
-import IHeader from "../components/IHeader.vue";
+import Header from "../components/Header.vue";
 import { useI18nStore } from "../stores/i18nStore";
 
 const i18n = useI18nStore();
@@ -8,7 +8,7 @@ const { toggleLocale } = i18n;
 
 <template>
   <div>
-    <i-header>
+    <Header>
       <b-tooltip
         label="Переключить язык"
         type="is-dark"
@@ -17,7 +17,7 @@ const { toggleLocale } = i18n;
       >
         <b-button icon-right="translate" rounded size="is-small" @click="toggleLocale" />
       </b-tooltip>
-    </i-header>
+    </Header>
 
     <main :class="$style.contentWrapper">
       <router-view />

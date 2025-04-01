@@ -9,15 +9,11 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
-// Global components
-import IInput from "@/components/IInput.vue";
-
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
 app.use(i18n);
-app.component("i-input", IInput);
 app.use(Button);
 app.use(Breadcrumb);
 app.use(Dropdown);
