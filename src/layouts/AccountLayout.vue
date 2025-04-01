@@ -10,7 +10,7 @@ const { toggleLocale } = i18n;
   <div>
     <Header>
       <b-tooltip
-        label="Переключить язык"
+        :label="$t('actions.switchLanguage')"
         type="is-dark"
         position="is-left"
         size="is-small"

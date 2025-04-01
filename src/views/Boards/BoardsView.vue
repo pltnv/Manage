@@ -62,7 +62,7 @@ const openDesk = async (id, boardName) => {
       <div :class="$style.headerRight">
         <b-input
           v-model="searchValue"
-          :placeholder="$t('boards.search')"
+          :placeholder="$t('boards.searchPlaceholder')"
           type="search"
           icon="magnify"
           icon-clickable

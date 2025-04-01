@@ -40,7 +40,7 @@ const handleCreate = () => {
       </div>
 
       <div :class="$style.formGroup">
-        <label :class="$style.formLabel"> {{ $t("boards.chooseColor") }}</label>
+        <label :class="$style.formLabel"> {{ $t("boards.newBoard.chooseColor") }}</label>
         <ColorPicker v-model="color" :colors="colors" />
       </div>
     </div>

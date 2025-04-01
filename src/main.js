@@ -1,5 +1,5 @@
 import "@mdi/font/css/materialdesignicons.css";
-import i18n from "./plugins/i18n/i18n";
+import i18n from "@/locales/index";
 import { Breadcrumb, Button, Input, Modal, Dropdown, Tooltip } from "buefy";
 import "buefy/dist/buefy.css";
 
