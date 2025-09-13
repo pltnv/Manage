@@ -10,11 +10,18 @@
   </a>
  </p>
 
+ <p align="center">
+  <a href="https://pltnv.github.io/Manage">
+    <img src="https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f?style=for-the-badge&logo=github&logoColor=white" alt="Demo">
+  </a>
+</p>
+
 # &#x23F1; Manage app
 
 A Vue.js-based Kanban board for task management, focusing on native Drag & Drop API integration for seamless task and column reordering. The goal of this project is to explore browser-native DnD functionality without relying on third-party libraries.
 
 ## ✨ Features
+
 - **Pure JavaScript Drag & Drop**
   - Task reordering within columns
   - Moving tasks between columns
