@@ -1,6 +1,7 @@
 export default {
   column: {
-    addTask: "Добавить задачу"
+    addTask: "Добавить задачу",
+    addColumn: "Добавить колонку"
   },
   lists: {
     title: "Списки"

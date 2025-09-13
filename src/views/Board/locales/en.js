@@ -1,6 +1,7 @@
 export default {
   column: {
-    addTask: "Add a task"
+    addTask: "Add task",
+    addColumn: "Add column"
   },
   lists: {
     title: "Lists"

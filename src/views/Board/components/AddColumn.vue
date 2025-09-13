@@ -1,3 +1,32 @@
+<script setup>
+import { ref, nextTick } from "vue";
+
+const emit = defineEmits(["add-column"]);
+
+const isAddingColumn = ref(false);
+const newColumnTitle = ref("");
+const columnInput = ref(null);
+
+const startAddingColumn = async () => {
+  isAddingColumn.value = true;
+  await nextTick();
+  columnInput.value?.focus();
+};
+
+const addColumn = () => {
+  if (newColumnTitle.value.trim()) {
+    emit("add-column", newColumnTitle.value.trim());
+    newColumnTitle.value = "";
+    isAddingColumn.value = false;
+  }
+};
+
+const cancelAddingColumn = () => {
+  isAddingColumn.value = false;
+  newColumnTitle.value = "";
+};
+</script>
+
 <template>
   <div :class="$style.addColumnContainer">
     <button
@@ -5,7 +34,7 @@
       :class="$style.addColumnButton"
       @click="startAddingColumn"
     >
-      <span :class="$style.plusIcon">+</span> Добавить колонку
+      <span :class="$style.plusIcon">+</span> {{ $t("column.addColumn") }}
     </button>
 
     <div v-else :class="$style.addColumnForm">
@@ -40,34 +69,6 @@
   </div>
 </template>
 
-<script setup>
-import { ref, nextTick } from "vue";
-
-const emit = defineEmits(["add-column"]);
-
-const isAddingColumn = ref(false);
-const newColumnTitle = ref("");
-const columnInput = ref(null);
-
-const startAddingColumn = async () => {
-  isAddingColumn.value = true;
-  await nextTick();
-  columnInput.value?.focus();
-};
-
-const addColumn = () => {
-  if (newColumnTitle.value.trim()) {
-    emit("add-column", newColumnTitle.value.trim());
-    newColumnTitle.value = "";
-    isAddingColumn.value = false;
-  }
-};
-
-const cancelAddingColumn = () => {
-  isAddingColumn.value = false;
-  newColumnTitle.value = "";
-};
-</script>
 
 <style lang="scss" module>
 .addColumnContainer {

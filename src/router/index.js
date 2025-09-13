@@ -5,18 +5,10 @@ import BoardRoutes from "@/views/Board/router/routes";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // todo:
-    // {
-    //   path: "/",
-    //   component: () => import("@/layouts/AccountLayout.vue"),
-    //   children: [
-    //     {
-    //       path: "",
-    //       name: "Main",
-    //       component: () => import("@/views/HomeView.vue")
-    //     }
-    //   ]
-    // },
+    {
+      path: "/",
+      redirect: { name: "Boards" }
+    },
     ...BoardsRoutes,
     ...BoardRoutes
   ]
