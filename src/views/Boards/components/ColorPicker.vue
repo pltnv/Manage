@@ -28,7 +28,7 @@ const selectColor = (color) => {
       v-for="color in colors"
       :key="color"
       :style="{ backgroundColor: color }"
-      :class="[$style.option, selectedColor === color && $style.selected]"
+      :class="[$style.option, selectedColor === color ? $style.selected : '']"
       @click="selectColor(color)"
     />
   </div>
