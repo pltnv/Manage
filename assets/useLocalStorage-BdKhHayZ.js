@@ -1,1 +1,0 @@
-import{z as c}from"./index-KuERtz-3.js";const l=(t,e)=>{const o=t.__vccOpts||t;for(const[a,r]of e)o[a]=r;return o};function g(t,e,o){localStorage.getItem(e)&&(t.value=JSON.parse(localStorage.getItem(e))),c(()=>t.value,a=>{localStorage.setItem(e,JSON.stringify(a))},{deep:o})}export{l as _,g as u};
