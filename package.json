@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "format": "prettier --write \"src/**/*.{js,jsx,vue}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,vue}\""
   },
   "dependencies": {
     "buefy": "npm:@ntohq/buefy-next@^0.2.0",
