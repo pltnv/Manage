@@ -3,6 +3,7 @@ import { useRoute } from "vue-router";
 import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 
 export function useBoards() {
+  const route = useRoute();
   const personalTaskStore = usePersonalTaskStore();
 
   const { boards } = personalTaskStore;
