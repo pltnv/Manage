@@ -5,7 +5,6 @@ import { usePersonalTaskStore } from "@/stores/personalTaskStore";
 export function useBoards() {
   const personalTaskStore = usePersonalTaskStore();
 
-  // add storeToRefs thing
   const { boards } = personalTaskStore;
 
   const currentBoardIndex = computed(() => route.params.id);
