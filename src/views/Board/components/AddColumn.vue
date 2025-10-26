@@ -46,6 +46,7 @@ const cancelAddingColumn = () => {
         autofocus
         @keyup.enter="addColumn"
       />
+      
       <div :class="$style.addColumnActions">
         <b-button
           :class="$style.saveButton"
